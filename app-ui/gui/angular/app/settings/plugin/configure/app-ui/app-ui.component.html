@@ -1,0 +1,34 @@
+<!--
+    Author:     Thomas D'haenens
+    License:    GPL-3.0
+    Link:       https://github.com/BENEATLY/neat-community-plugins/
+    Contact:    https://neatly.be/
+-->
+
+
+<!-- Determine if Route is Allowed -->
+<div *ngIf="routeAllowed()" class="result-div with-footer">
+
+<!-- Navigation Header -->
+<app-template-navigation-header></app-template-navigation-header>
+
+<!-- Results -->
+<div class="results center">
+
+  <!-- Boxes -->
+  <div class="row nomargin justify">
+
+    <!-- UI Group -->
+    <app-template-plugin-option-box [context]="context" [options]="pluginOptions" [group]="'UI'"></app-template-plugin-option-box>
+
+    <!-- Important Message Group -->
+    <app-template-plugin-option-box [context]="context" [options]="pluginOptions" [group]="'ImportantMessage'"></app-template-plugin-option-box>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<app-template-footer></app-template-footer>
+
+</div>

@@ -1,0 +1,100 @@
+#!/usr/local/bin/python
+
+################################################################################
+# Author:     Thomas D'haenens
+# License:    GPL-3.0
+# Link:       https://github.com/BENEATLY/neat-community-plugins/
+# Contact:    https://neatly.be/
+################################################################################
+
+
+# IMPORT: Standard Modules
+import sqlalchemy.sql.default_comparator                                                    # SQLAlchemy Default Comparator
+import sys                                                                                  # System Lib
+import ujson                                                                                # JSON Lib
+
+
+# FUNCTION: Read JSON File (No Logging)
+def readJSONFile(file):
+    with open(file, encoding='utf-8') as content:
+        return ujson.load(content)
+
+
+# CONFIGURATION: Determine Installation Location
+locationConfig = readJSONFile('/etc/neatly/base/location.json')
+
+# CONFIGURATION: Add Current Path to Default Python Paths
+sys.path.append(locationConfig['lib'])
+
+
+# IMPORT: Custom Modules
+from tables import *                                                                        # Tables Lib
+import actions                                                                              # Actions Lib
+from plugins import createPluginLogger                                                      # Plugins Lib
+
+
+# CONFIGURATION: Plugin
+pluginConfig = {'plugin': {'id': 16, 'name': 'Application Look & Feel'}, 'logger': 'resources'}
+
+# CONFIGURATION: Create Logger
+logger = createPluginLogger(pluginConfig['plugin'], pluginConfig['logger'], makePreferred=True)
+
+# CONFIGURATION: Executor
+execParams = {'internal': True, 'source': 'Resources (Plugin: ' + pluginConfig['plugin']['name'] + ')'}
+
+
+# CREATE: DB Connection
+session = createDBSession()
+
+
+# GET: Current Plugin
+currentPlugin = session.query(Plugin).filter_by(id=pluginConfig['plugin']['id']).first()
+
+# GET: Root Team
+rootTeam = session.query(Team).filter_by(id=1).first()
+
+# GET: API Actions
+apiActionList = session.query(ApiAction).all()
+apiActionDict = {apiAction.name: apiAction for apiAction in apiActionList}
+
+# INSERT: Plugin Action Rights
+pluginActionRights = [
+    {'plugin': currentPlugin, 'action': 'use', 'team': [rootTeam], 'function': [], 'own': True, 'isolated': True, 'all': True},
+    {'plugin': currentPlugin, 'action': 'logo', 'team': [], 'function': [], 'own': True, 'isolated': True, 'all': True},
+    {'plugin': currentPlugin, 'action': 'icon', 'team': [], 'function': [], 'own': True, 'isolated': True, 'all': True}
+]
+[actions.createByDict(execParams, session, PluginActionRight, **pluginActionRight) for pluginActionRight in pluginActionRights]
+
+# INSERT: Plugin Option Rights
+pluginOptionRights = [
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'appTitle'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'appLogo'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'appIcon'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'contactLink'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'active'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'message'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'backgroundColor'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'inAppOnly'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'appTitle'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'appLogo'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'appIcon'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'UI', 'option': 'contactLink'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'active'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'message'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'backgroundColor'},
+    {'plugin': currentPlugin, 'apiAction': apiActionDict['Edit'], 'team': [rootTeam], 'function': [], 'group': 'ImportantMessage', 'option': 'inAppOnly'}
+]
+[actions.createByDict(execParams, session, PluginOptionRight, **pluginOptionRight) for pluginOptionRight in pluginOptionRights]
+
+# INSERT: Plugin Options
+pluginOptions = [
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appTitle', 'nullable': False, 'public': True, 'rawValue': 'NEATLY - Application'},
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appLogo', 'nullable': False, 'public': True, 'rawValue': {'name': 'neatly-logo-white.png', 'reference': 'neatly-logo-white.png'}},
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appIcon', 'nullable': False, 'public': True, 'rawValue': {'name': 'neatly-icon-gradient.ico', 'reference': 'neatly-icon-gradient.ico'}},
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'contactLink', 'nullable': False, 'public': True, 'rawValue': 'https://neatly.be/'},
+    {'plugin': currentPlugin, 'group': 'ImportantMessage', 'option': 'active', 'nullable': False, 'public': True, 'rawValue': False},
+    {'plugin': currentPlugin, 'group': 'ImportantMessage', 'option': 'message', 'nullable': False, 'public': True, 'rawValue': 'Type your important message here.'},
+    {'plugin': currentPlugin, 'group': 'ImportantMessage', 'option': 'backgroundColor', 'nullable': False, 'public': True, 'rawValue': '#D45651'},
+    {'plugin': currentPlugin, 'group': 'ImportantMessage', 'option': 'inAppOnly', 'nullable': False, 'public': True, 'rawValue': True}
+]
+[actions.createByDict(execParams, session, PluginOption, **pluginOption) for pluginOption in pluginOptions]

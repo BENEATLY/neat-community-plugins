@@ -1,0 +1,9 @@
+{
+    "routes": [
+        {
+            "path": "settings/plugin/configure/app-ui",
+            "component": "SettingsPluginConfigureAppUIComponent",
+            "type": "fixed"
+        }
+    ]
+}
