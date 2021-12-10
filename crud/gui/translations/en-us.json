@@ -1,0 +1,13 @@
+{
+    "settings": {
+        "crud": {
+            "pagetitle": "CRUD",
+            "selectobject": "Select Object"
+        }
+    },
+    "leftbar": {
+        "settings": {
+            "crud": "CRUD"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "routes": [
+        {
+            "path": "settings/crud",
+            "component": "SettingsCrudComponent",
+            "type": "fixed-ref"
+        }
+    ]
+}

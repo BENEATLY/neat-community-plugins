@@ -1,0 +1,54 @@
+<!--
+    Author:     Thomas D'haenens
+    License:    GPL-3.0
+    Link:       https://github.com/BENEATLY/neat-community-plugins/
+    Contact:    https://neatly.be/
+-->
+
+
+<!-- Determine if Route is Allowed -->
+<div *ngIf="routeAllowed()" class="result-div with-footer">
+
+<!-- Navigation Header -->
+<app-template-navigation-header [context]="context" [defaultObjectView]="true">
+
+  <!-- Left -->
+  <ng-container left>
+
+    <!-- Crud Object Selection -->
+    <div class="dropdown view-dropdown split">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownViewButton" data-toggle="dropdown">
+        <ng-container *ngIf="(!crudSelector.apiObject)">{{ 'settings.crud.selectobject' | translate | titlecase }}</ng-container>
+        <ng-container *ngIf="crudSelector.apiObject">{{ translateLib.constructSP(crudSelector.apiObject, 1) | translate | titlecase }}</ng-container>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownViewButton">
+        <ng-container *ngFor="let option of crudLib.getAllowedAPIObjects(appConfig.config, data.userData.right)">
+          <a class="dropdown-item" (click)="selectObject(option)">{{ translateLib.constructSP(option.name, 1) | translate | titlecase }}</a>
+        </ng-container>
+      </div>
+    </div>
+
+  </ng-container>
+
+</app-template-navigation-header>
+
+<!-- Results -->
+<div class="results">
+
+  <!-- API Object Selected -->
+  <ng-container *ngIf="objectDefinition">
+
+    <!-- Filter Palette -->
+    <app-template-filter-palette [context]="context"></app-template-filter-palette>
+
+    <!-- Display Result Table -->
+    <app-template-result-table [context]="context"></app-template-result-table>
+
+  </ng-container>
+
+</div>
+
+<!-- Footer -->
+<app-template-footer></app-template-footer>
+
+</div>
