@@ -1,0 +1,447 @@
+{
+    "definitions": {
+        "Object": {
+            "Coordinate": {
+                "properties": {
+                    "all": [
+                        {
+                            "value": 0,
+                            "property": "latitude",
+                            "accepted": {
+                                "type": "Number",
+                                "step": "any",
+                                "min": -90,
+                                "max": 90,
+                                "nullable": false,
+                                "unit": "°"
+                            }
+                        },
+                        {
+                            "value": 0,
+                            "property": "longitude",
+                            "accepted": {
+                                "type": "Number",
+                                "step": "any",
+                                "min": -180,
+                                "max": 180,
+                                "nullable": false,
+                                "unit": "°"
+                            }
+                        },
+                        {
+                            "value": 0,
+                            "property": "elevation",
+                            "accepted": {
+                                "type": "Number",
+                                "step": 0.01,
+                                "nullable": true,
+                                "unit": "m"
+                            }
+                        }
+                    ],
+                    "isolated": [
+                        {
+                            "value": 0,
+                            "property": "latitude",
+                            "accepted": {
+                                "type": "Number",
+                                "step": "any",
+                                "min": -90,
+                                "max": 90,
+                                "nullable": false,
+                                "unit": "°"
+                            }
+                        },
+                        {
+                            "value": 0,
+                            "property": "longitude",
+                            "accepted": {
+                                "type": "Number",
+                                "step": "any",
+                                "min": -180,
+                                "max": 180,
+                                "nullable": false,
+                                "unit": "°"
+                            }
+                        },
+                        {
+                            "value": 0,
+                            "property": "elevation",
+                            "accepted": {
+                                "type": "Number",
+                                "step": 0.01,
+                                "nullable": true,
+                                "unit": "m"
+                            }
+                        }
+                    ],
+                    "own": [
+                        {
+                            "value": 0,
+                            "property": "latitude",
+                            "accepted": {
+                                "type": "Number",
+                                "step": "any",
+                                "min": -90,
+                                "max": 90,
+                                "nullable": false,
+                                "unit": "°"
+                            }
+                        },
+                        {
+                            "value": 0,
+                            "property": "longitude",
+                            "accepted": {
+                                "type": "Number",
+                                "step": "any",
+                                "min": -180,
+                                "max": 180,
+                                "nullable": false,
+                                "unit": "°"
+                            }
+                        },
+                        {
+                            "value": 0,
+                            "property": "elevation",
+                            "accepted": {
+                                "type": "Number",
+                                "step": 0.01,
+                                "nullable": true,
+                                "unit": "m"
+                            }
+                        }
+                    ]
+                }
+            },
+            "Country": {
+                "properties": {
+                    "all": [
+                        {
+                            "value": "",
+                            "property": "name",
+                            "sort": {
+                                "priority": 1,
+                                "order": true
+                            },
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "restriction": [
+                                    "unique"
+                                ],
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "countryCode",
+                            "accepted": {
+                                "type": "String",
+                                "min": 1,
+                                "max": 5,
+                                "restriction": [
+                                    "unique"
+                                ],
+                                "nullable": false
+                            },
+                            "column": false
+                        }
+                    ],
+                    "isolated": [
+                        {
+                            "value": "",
+                            "property": "name",
+                            "sort": {
+                                "priority": 1,
+                                "order": true
+                            },
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "restriction": [
+                                    "unique"
+                                ],
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "countryCode",
+                            "accepted": {
+                                "type": "String",
+                                "min": 1,
+                                "max": 5,
+                                "restriction": [
+                                    "unique"
+                                ],
+                                "nullable": false
+                            },
+                            "column": false
+                        }
+                    ],
+                    "own": [
+                        {
+                            "value": "",
+                            "property": "name",
+                            "sort": {
+                                "priority": 1,
+                                "order": true
+                            },
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "restriction": [
+                                    "unique"
+                                ],
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "countryCode",
+                            "accepted": {
+                                "type": "String",
+                                "min": 1,
+                                "max": 5,
+                                "restriction": [
+                                    "unique"
+                                ],
+                                "nullable": false
+                            },
+                            "column": false
+                        }
+                    ]
+                }
+            },
+            "Address": {
+                "properties": {
+                    "all": [
+                        {
+                            "value": "",
+                            "property": "street",
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "nr",
+                            "accepted": {
+                                "type": "String",
+                                "min": 1,
+                                "max": 10,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "postalCode",
+                            "accepted": {
+                                "type": "String",
+                                "min": 4,
+                                "max": 12,
+                                "nullable": false
+                            },
+                            "column": false
+                        },
+                        {
+                            "value": "",
+                            "property": "city",
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": {
+                                "id": null
+                            },
+                            "property": "country",
+                            "accepted": {
+                                "type": "Id",
+                                "list": "{{apiRootUrl}}country/list",
+                                "nullable": false
+                            },
+                            "linked": true,
+                            "sort": {
+                                "priority": 1,
+                                "order": true
+                            },
+                            "reference": "Country"
+                        },
+                        {
+                            "value": {
+                                "id": null
+                            },
+                            "property": "coordinate",
+                            "accepted": {
+                                "type": "Id",
+                                "list": "{{apiRootUrl}}coordinate/list",
+                                "nullable": true
+                            },
+                            "column": false,
+                            "linked": true,
+                            "reference": "Coordinate"
+                        }
+                    ],
+                    "isolated": [
+                        {
+                            "value": "",
+                            "property": "street",
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "nr",
+                            "accepted": {
+                                "type": "String",
+                                "min": 1,
+                                "max": 10,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "postalCode",
+                            "accepted": {
+                                "type": "String",
+                                "min": 4,
+                                "max": 12,
+                                "nullable": false
+                            },
+                            "column": false
+                        },
+                        {
+                            "value": "",
+                            "property": "city",
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": {
+                                "id": null
+                            },
+                            "property": "country",
+                            "accepted": {
+                                "type": "Id",
+                                "list": "{{apiRootUrl}}country/list",
+                                "nullable": false
+                            },
+                            "linked": true,
+                            "sort": {
+                                "priority": 1,
+                                "order": true
+                            },
+                            "reference": "Country"
+                        },
+                        {
+                            "value": {
+                                "id": null
+                            },
+                            "property": "coordinate",
+                            "accepted": {
+                                "type": "Id",
+                                "list": "{{apiRootUrl}}coordinate/list",
+                                "nullable": true
+                            },
+                            "column": false,
+                            "linked": true,
+                            "reference": "Coordinate"
+                        }
+                    ],
+                    "own": [
+                        {
+                            "value": "",
+                            "property": "street",
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "nr",
+                            "accepted": {
+                                "type": "String",
+                                "min": 1,
+                                "max": 10,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": "",
+                            "property": "postalCode",
+                            "accepted": {
+                                "type": "String",
+                                "min": 4,
+                                "max": 12,
+                                "nullable": false
+                            },
+                            "column": false
+                        },
+                        {
+                            "value": "",
+                            "property": "city",
+                            "accepted": {
+                                "type": "String",
+                                "min": 2,
+                                "max": 80,
+                                "nullable": false
+                            }
+                        },
+                        {
+                            "value": {
+                                "id": null
+                            },
+                            "property": "country",
+                            "accepted": {
+                                "type": "Id",
+                                "list": "{{apiRootUrl}}country/list",
+                                "nullable": false
+                            },
+                            "linked": true,
+                            "sort": {
+                                "priority": 1,
+                                "order": true
+                            },
+                            "reference": "Country"
+                        },
+                        {
+                            "value": {
+                                "id": null
+                            },
+                            "property": "coordinate",
+                            "accepted": {
+                                "type": "Id",
+                                "list": "{{apiRootUrl}}coordinate/list",
+                                "nullable": true
+                            },
+                            "column": false,
+                            "linked": true,
+                            "reference": "Coordinate"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

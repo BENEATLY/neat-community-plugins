@@ -1,0 +1,19 @@
+{
+    "routes": [
+        {
+            "path": "address",
+            "component": "AddressComponent",
+            "type": "item"
+        },
+        {
+            "path": "coordinate",
+            "component": "CoordinateComponent",
+            "type": "item"
+        },
+        {
+            "path": "country",
+            "component": "CountryComponent",
+            "type": "item"
+        }
+    ]
+}
