@@ -1,0 +1,397 @@
+#!/usr/local/bin/python
+
+################################################################################
+# Author:     Thomas D'haenens
+# License:    GPL-3.0
+# Link:       https://github.com/BENEATLY/neat-community-plugins/
+# Contact:    https://neatly.be/
+################################################################################
+
+
+# IMPORT: Standard Modules
+import sys                                                                                                                  # System Lib
+import ujson                                                                                                                # UJSON Lib
+import ldap                                                                                                                 # LDAP Lib
+import io                                                                                                                   # IO Lib
+from PIL import Image                                                                                                       # Image Lib
+
+
+# FUNCTION: Read JSON File (No Logging)
+def readJSONFile(file):
+    with open(file, encoding='utf-8') as content:
+        return ujson.load(content)
+
+
+# CONFIGURATION: Determine Installation Location
+locationConfig = readJSONFile('/etc/neatly/base/location.json')
+
+# CONFIGURATION: Add Current Path to Default Python Paths
+sys.path.append(locationConfig['lib'])
+
+
+# IMPORT: Custom Modules
+from basic import *                                                                                                         # Basic Lib
+from plugins import createPluginLogger, constructPluginParams, readOptionDictByPlugin, detectOptionChangesViaMessage        # Plugin Lib
+from validate import validateObject, validateEditability                                                                    # Validate Lib
+import actions                                                                                                              # Actions Lib
+import tables                                                                                                               # Tables Lib
+
+
+# CONFIGURATION: Plugin
+pluginConfig = {
+    'plugin': {'id': 5, 'name': 'LDAP'},
+    'logger': 'ldap-sync',
+    'configListener': [
+        {'plugin': {'id': 5}, 'options': [
+            {'group': 'Connection'},
+            {'group': 'Linked'},
+            {'group': 'Synchronisation', 'option': 'interval'},
+            {'group': 'Synchronisation', 'option': 'fullSync'}
+        ]}
+    ]
+}
+
+# CONFIGURATION: Create Logger
+logger = createPluginLogger(pluginConfig['plugin'], pluginConfig['logger'], makePreferred=True)
+
+
+# FUNCTION: Link LDAP User Properties
+@log()
+def linkLDAPUserProperties(linkedConfig, data, ignore=[]):
+    return {origProp: data[linkedProp][0].decode() for origProp, linkedProp in linkedConfig.items() if (linkedProp in data) and (origProp not in ignore)}
+
+
+# FUNCTION: Get LDAP User Property
+@log()
+def getLDAPUserProperty(linkedConfig, data, property, decode=True):
+    if ((property in linkedConfig) and (linkedConfig[property] in data)):
+        return (data[linkedConfig[property]][0].decode() if decode else data[linkedConfig[property]][0])
+
+
+# FUNCTION: Has Updated Image
+@log(returnValue=False)
+def hasUpdatedImage(user, fileReference):
+    if (user.image):
+        currentHash = calculateHashFromFile(user.image.reference)
+        newHash = calculateHashFromFile(fileReference)
+        if (currentHash == newHash):
+            return False
+    _logger.info('Image update detected for user: ' + user.userName.upper())
+    return True
+
+
+# FUNCTION: Image Upload
+@log()
+def imageUpload(imageData):
+    fileReference = uniqueFileReference()
+    with Image.open(io.BytesIO(imageData)) as im:
+        im.save(sys.sharedConfig.location['lib'] + 'objects' + '/' + fileReference, "PNG")
+    return fileReference
+
+
+# FUNCTION: Update Sync Time
+@log()
+def updateSyncTime(kwargs):
+    lastSyncTime = kwargs['pluginParams']['session'].query(tables.PluginOption).filter_by(plugin_id=pluginConfig['plugin']['id'], group='Synchronisation', option='lastSync').first()
+    evalRtnCode()(actions.edit)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.PluginOption, lastSyncTime.id, rawValue=datetime.now().isoformat())
+    _logger.info('Updated last sync time')
+
+
+# FUNCTION: Set LDAP Group Sync Status
+@log()
+def setLdapGroupSyncStatus(kwargs, ldapGroup, status):
+    evalRtnCode()(actions.edit)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.LDAPGroup, ldapGroup.id, syncStatus=status)
+    _logger.info('Updated sync status of LDAP group: ' + str(ldapGroup.path))
+
+
+# FUNCTION: Perform Back Up
+@log()
+@constructPluginParams(pluginConfig, inSession=True)
+def performLDAPSync(**kwargs):
+
+    # Log Message
+    _logger.info('Performing LDAP synchronisation')
+
+    # Define LDAP Connection
+    page_control = ldap.controls.SimplePagedResultsControl(True, size=5000, cookie='')
+    conn = ldap.initialize(kwargs['Connection']['url'])
+    conn.protocol_version = kwargs['Connection']['protocol']
+    conn.set_option(ldap.OPT_REFERRALS, 0)
+
+    # Connect to LDAP Server
+    try:
+        conn.simple_bind_s(kwargs['Connection']['userName'], kwargs['Connection']['password'])
+        _logger.info('Successfully connected to the LDAP server')
+    except:
+        _logger.warning('Failed to connect to the LDAP server')
+        _logger.warning(' '.join(str(traceback.format_exc()).split()))
+
+    # Determine Linked LDAP User Properties
+    linkedProperties = list(kwargs['Linked'].values())
+
+    # Query API Actions
+    editAction = kwargs['pluginParams']['session'].query(tables.ApiAction).filter_by(name='Edit').first()
+    createAction = kwargs['pluginParams']['session'].query(tables.ApiAction).filter_by(name='Create').first()
+    if (editAction and createAction):
+        _logger.debug('Found the action objects')
+    else:
+        _logger.warning('Did not manage to find the action objects')
+        return False
+
+    # Query LDAP AuthenticationMethod
+    authMethod = kwargs['pluginParams']['session'].query(tables.AuthenticationMethod).filter_by(plugin_id=pluginConfig['plugin']['id']).first()
+    if (authMethod):
+        _logger.debug('Found the LDAP authentication method object')
+    else:
+        _logger.warning('Did not manage to find the LDAP authentication method object')
+        return False
+
+    # Query UserName of Existing Users
+    existingUserNames = [userName for userName, in kwargs['pluginParams']['session'].query(tables.User.userName)]
+    _logger.debug('Found ' + str(len(existingUserNames)) + ' existing user(s)')
+
+    # Query LDAP Groups
+    ldapGroups = kwargs['pluginParams']['session'].query(tables.LDAPGroup).all()
+    _logger.info('Found ' + str(len(ldapGroups)) + ' LDAP group(s)')
+
+    # Iterate over LDAP Groups
+    for ldapGroup in ldapGroups:
+
+        # Log Message
+        _logger.info('Evaluating LDAP group: ' + str(ldapGroup.path))
+
+        # Try
+        try:
+
+            # Query LDAP Group
+            queryResult = conn.search_ext_s(ldapGroup.path, ldap.SCOPE_SUBTREE, "(cn=*)", sizelimit=5000, attrlist=['member'], serverctrls=[page_control])
+
+            # Determine Members
+            members = queryResult[0][1]['member']
+            _logger.info('Discovered ' + str(len(members)) + ' members')
+
+            # Useful Lists
+            dataList = {'noDiff': [], 'invalidData': [], 'new': [], 'changed': []}
+
+            # Iterate over Members
+            for member in members:
+
+                # Query Member
+                memberQueryResult = conn.search_ext_s(member.decode(), ldap.SCOPE_SUBTREE, "(cn=*)", sizelimit=5000, attrlist=linkedProperties, serverctrls=[page_control])
+
+                # Get Member Info
+                userData = linkLDAPUserProperties(kwargs['Linked'], memberQueryResult[0][1], ignore=['image'])
+
+                # Has Basic Info?
+                if ('userName' in userData):
+
+                    # New User
+                    if (userData['userName'] not in existingUserNames):
+
+                        # Add Authentication Method to User Data
+                        userData['authenticationMethod'] = authMethod
+
+                        # Add Defined Team and Function to User Data
+                        userData['team'] = ldapGroup.team
+                        userData['function'] = ldapGroup.function
+
+                        # Valid User Data
+                        if (validateObject(kwargs['pluginParams']['session'], tables.User, objectify(userData), ['id'])):
+                            _logger.info('Valid data for user: ' + str(userData['userName']).upper())
+
+                            # Create User
+                            evalRtnCode()(actions.createByDict)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.User, **userData)
+
+                            # Get Created User
+                            newUser = actions.retrieveObjectByUnique(kwargs['pluginParams']['session'], tables.User, userData)
+
+                            # New User Found
+                            if (newUser):
+
+                                # Get Image Data
+                                imageData = getLDAPUserProperty(kwargs['Linked'], memberQueryResult[0][1], 'image', decode=False)
+
+                                # Has Image Data
+                                if (imageData):
+
+                                    # Image Upload
+                                    fileReference = imageUpload(imageData)
+
+                                    # Create File and Link to User
+                                    evalRtnCode()(actions.createByDict)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.File, name='LdapImage.png', reference=fileReference, uploader=newUser, size=getFileSize(ref=fileReference), userImage=[newUser])
+
+                                # Create LDAP User Create Event
+                                evalRtnCode()(actions.createByDict)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.LDAPUserChange, user=newUser, action=createAction)
+
+                                # Log Message
+                                _logger.info('Created user: ' + str(userData['userName']).upper())
+
+                                # Append User to New List
+                                dataList['new'].append(str(userData['userName']).upper())
+
+                            # No New User
+                            else:
+                                _logger.warning('Did not manage to find newly created user')
+
+                        # Invalid User Data
+                        else:
+
+                            # Log Message
+                            _logger.warning('Invalid data for user: ' + str(userData['userName']).upper())
+
+                            # Append User to Invalid Data List
+                            dataList['invalidData'].append(str(userData['userName']).upper())
+
+                    # Existing User
+                    elif (kwargs['Synchronisation']['fullSync']):
+
+                        # Check if Existing User has Correct AuthenticationMethod
+                        existingUser = kwargs['pluginParams']['session'].query(tables.User).filter_by(userName=userData['userName'], authenticationMethod_id=authMethod.id).first()
+                        if (existingUser):
+
+                            # Add Defined Team and Function to User Data
+                            userData['team'] = ldapGroup.team
+                            userData['function'] = ldapGroup.function
+
+                            # User Data (Copy) without userName
+                            modUserData = {key: val for key,val in userData.items() if (key != 'userName')}
+
+                            # Check for Differences
+                            diff = [key for key,val in modUserData.items() if (getattr(existingUser, key) != val)]
+
+                            # Get Image Data
+                            imageData = getLDAPUserProperty(kwargs['Linked'], memberQueryResult[0][1], 'image', decode=False)
+
+                            # Has Image Data
+                            if (imageData):
+
+                                # (Temporary) Image Upload
+                                fileReference = imageUpload(imageData)
+
+                                # Check if Image is Different
+                                if (hasUpdatedImage(existingUser, fileReference)):
+
+                                    # Add To Diff
+                                    diff.append('image')
+
+                                    # Create File and Link to User
+                                    evalRtnCode()(actions.createByDict)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.File, name='LdapImage.png', reference=fileReference, uploader=existingUser, size=getFileSize(ref=fileReference), userImage=[existingUser])
+
+                                # Delete (Same File Content)
+                                else:
+                                    removeFile(sys.sharedConfig.location['lib'] + 'objects' + '/' + fileReference)
+
+                            # Found Differences
+                            if (diff):
+
+                                # Log Message
+                                _logger.info('Discovered differences for user: ' + str(userData['userName']).upper() + ' (' + ', '.join(diff) + ')')
+
+                                # Valid User Data
+                                if (validateEditability(kwargs['pluginParams']['session'], tables.User, objectify(modUserData))):
+                                    _logger.info('Valid data for user: ' + str(userData['userName']).upper())
+
+                                    # Overwrite Changed Data of User
+                                    evalRtnCode()(actions.edit)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.User, existingUser.id, **modUserData)
+
+                                    # Create LDAP User Change Event
+                                    evalRtnCode()(actions.createByDict)(kwargs['pluginParams']['execParams'], kwargs['pluginParams']['session'], tables.LDAPUserChange, user=existingUser, action=editAction)
+
+                                    # Log Message
+                                    _logger.info('Updated user data of: ' + str(userData['userName']).upper())
+
+                                    # Append User to Changed List
+                                    dataList['changed'].append(str(userData['userName']).upper())
+
+                                # Invalid User Data
+                                else:
+
+                                    # Log Message
+                                    _logger.warning('Invalid data for user: ' + str(userData['userName']).upper())
+
+                                    # Append User to Invalid Data List
+                                    dataList['invalidData'].append(str(userData['userName']).upper())
+
+                            # No Differences
+                            else:
+
+                                # Append User to No Difference List
+                                dataList['noDiff'].append(str(userData['userName']).upper())
+
+                # No Basic Info
+                else:
+                    _logger.warning('User data found without userName')
+
+            # Set LDAP Group Sync Status
+            if (members):
+                setLdapGroupSyncStatus(kwargs, ldapGroup, True)
+            else:
+                setLdapGroupSyncStatus(kwargs, ldapGroup, False)
+
+            # New User List
+            _logger.info('New users: ' + str(dataList['new']))
+
+            # Changed User List
+            _logger.info('Changed users: ' + str(dataList['changed']))
+
+            # No Difference User List
+            _logger.info('Users without changed data: ' + str(dataList['noDiff']))
+
+            # User List with Invalid Data
+            _logger.info('Users with invalid data: ' + str(dataList['invalidData']))
+
+            # Log Message
+            _logger.info('Successfully synchronised LDAP group: ' + str(ldapGroup.path))
+
+        # Except
+        except:
+            _logger.info('Failed to sync LDAP group: ' + str(ldapGroup.path))
+            _logger.warning(' '.join(str(traceback.format_exc()).split()))
+            setLdapGroupSyncStatus(kwargs, ldapGroup, False)
+
+    # Log Message
+    _logger.info('Successfully synchronised all LDAP groups')
+
+    # Update Sync Time
+    updateSyncTime(kwargs)
+
+    return True
+
+
+# TASK HANDLER SETTER: Define Next Execution Function
+@log()
+def nextExecFunc(taskHandler):
+    return (taskHandler.prevExec + timedelta(seconds=taskHandler.params['Synchronisation']['interval']))
+
+
+# TASK HANDLER SETTER: Define Eval Function
+@log()
+def taskEvalFunc(handler, consumer, config):
+    if (detectOptionChangesViaMessage(consumer, config)):
+        pluginOptions = readOptionDictByPlugin(config['plugin'])
+        handler.updateParams(pluginOptions)
+        handler.setNextExec(nextExecFunc(handler))
+
+
+# CREATE: Consumer
+consumer = createConsumer(['_internal.trigger.pluginoption'])
+
+# TASK HANDLER: Create
+taskHandler = RecurringTaskHandler(name='ldap-sync', func=performLDAPSync, params={}, logger=logger)
+
+# TASK HANDLER: Set Plugin Options Config
+pluginOptions = readOptionDictByPlugin(pluginConfig['plugin'])
+taskHandler.updateParams(pluginOptions)
+
+# TASK HANDLER SETTER: Define Setter
+taskHandlerSetter = TaskHandlerSetter(taskHandler, nextExecFunc, logger, 5)
+
+# TASH HANDLER SETTER: Set Eval Function and Parameters
+taskHandlerSetter.setEvalFunc(taskEvalFunc)
+taskHandlerSetter.setEvalParams(handler=taskHandler, consumer=consumer, config=pluginConfig)
+
+# TASK HANDLER SETTER: Run
+taskHandlerSetter.run()
+
+# CLOSE: Consumer
+consumer.close()

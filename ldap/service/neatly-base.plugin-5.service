@@ -1,0 +1,19 @@
+################################################################################
+# Author:     Thomas D'haenens
+# License:    GPL-3.0
+# Link:       https://github.com/BENEATLY/neat-community-plugins/
+# Contact:    https://neatly.be/
+################################################################################
+
+
+[Unit]
+Description=LDAP Synchronisation Service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory={{WorkingDirectory}}
+ExecStart=/usr/bin/env "{{WorkingDirectory}}ldap-sync"
+
+[Install]
+WantedBy=multi-user.target

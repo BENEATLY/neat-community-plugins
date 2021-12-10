@@ -1,0 +1,173 @@
+{
+    "service": {
+        "plugin": {
+            "ldap": {
+                "ldap-sync": {
+                    "description": "LDAP synchronisation service"
+                }
+            }
+        }
+    },
+    "settings": {
+        "plugin": {
+            "configure": {
+                "ldap": {
+                    "pagetitle": "LDAP",
+                    "groups": "LDAP Groups",
+                    "recent-changes": "Recent LDAP User Changes",
+                    "info": {
+                        "groups": "This box visualises all LDAP groups linked to a certain team/function combination. These LDAP groups get synced between the remote server and the application. Discovered user objects will be imported in the application with the specified team and function.",
+                        "recent-changes": "This box visualises recently added or modified LDAP users. The origin of the change is an upstream modification on the remote LDAP server. The added or modified user is a result of the synchronisation process with this LDAP server."
+                    }
+                }
+            }
+        }
+    },
+    "leftbar": {
+        "settings": {
+            "plugin": {
+                "configure": {
+                    "ldap": "LDAP"
+                }
+            }
+        }
+    },
+    "plugins": {
+        "5": {
+            "groups": {
+                "Connection": "LDAP Connection",
+                "Linked": "Linked Properties",
+                "Synchronisation": "Synchronisation"
+            },
+            "help": {
+                "intro": {
+                    "Connection": "This box contains all properties required to be able to establish a connection with the remote LDAP server.",
+                    "Linked": "The purpose of this box is to link user properties to LDAP object attributes. Add the name of the LDAP object attribute next to the corresponding user property. By doing this, user information located on the LDAP server can be synced with the application. This will result in the automatic addition of users in the application.",
+                    "Synchronisation": "This box contains generic parameters used for synchronising users between the LDAP server and the application."
+                },
+                "properties": {
+                    "Connection": {
+                        "url": "The URL of the LDAP server. This starts with \"ldap://\" or \"ldaps://\" (for secure connections).",
+                        "protocol": "The protocol used by the LDAP server. This can be version 2 or version 3.",
+                        "userName": "The user name of the user used to authenticate to the LDAP server.",
+                        "password": "The password of the user used to authenticate to the LDAP server."
+                    },
+                    "Linked": {
+                        "userName": "The linked LDAP object attribute for the username",
+                        "firstName": "The linked LDAP object attribute for the first name of the user",
+                        "lastName": "The linked LDAP object attribute for the last name of the user",
+                        "mail": "The linked LDAP object attribute for the mail address of the user",
+                        "phone": "The linked LDAP object attribute for the phone number of the user",
+                        "image": "The linked LDAP object attribute for the image of the user"
+                    },
+                    "Synchronisation": {
+                        "interval": "The time interval between two consecutive synchonisations (in seconds)",
+                        "fullSync": "<li>When <b>enabled</b>, the user properties are fully synced with the remote LDAP server. Discrepancies between the current user information (in the application) and user information on the LDAP server get resolved.</li><li>When <b>disabled</b>, only new users are imported. Existing user information (in the application) will not be updated during synchronisation.</li>",
+                        "lastSync": "The last time a successful synchonisation with the remote LDAP server was completed"
+                    }
+                }
+            },
+            "Connection": {
+                "url": "LDAP URL",
+                "protocol": "Protocol",
+                "userName": "User Name",
+                "password": "Password"
+            },
+            "Linked": {
+                "userName": "Username",
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "mail": "Mail",
+                "phone": "Phone",
+                "image": "Image"
+            },
+            "Synchronisation": {
+                "interval": "Interval",
+                "fullSync": "Full Sync.",
+                "lastSync": "Last Sync."
+            }
+        }
+    },
+    "object": {
+        "LDAPGroup": {
+            "help": {
+                "intro": "{right, select, own{Your} isolated{Your team's} other{All}} LDAP groups are visualised here. An LDAP group is used in combination with the LDAP plugin to configure which LDAP paths (containing user information) are linked to which teams and functions in the application.",
+                "properties": {
+                    "team": "The team linked to users of the specified LDAP path",
+                    "function": "The function linked to users of the specified LDAP path",
+                    "path": "The LDAP path (e.g. cn=group,ou=people,dc=neatly,dc=be)",
+                    "syncStatus": "The latest synchronisation status of the specified LDAP path"
+                }
+            },
+            "modal": {
+                "info": {
+                    "title": "LDAP group: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                },
+                "edit": {
+                    "title": "edit LDAP group: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                },
+                "delete": {
+                    "title": "are you sure you want to delete this LDAP group?"
+                },
+                "create": {
+                    "title": "create LDAP group"
+                }
+            },
+            "naming": {
+                "singular": "LDAP Group",
+                "plural": "LDAP Groups"
+            },
+            "presentation": {
+                "all": "{item, property, path} ({item, property, team.name}, {item, property, function.name})",
+                "isolated": "{item, property, path} ({item, property, team.name}, {item, property, function.name})",
+                "own": "{item, property, path} ({item, property, team.name}, {item, property, function.name})"
+            },
+            "properties": {
+                "id": "identifier",
+                "team": "team",
+                "function": "function",
+                "path": "LDAP path",
+                "syncStatus": "Sync status"
+            }
+        },
+        "LDAPUserChange": {
+            "help": {
+                "intro": "{right, select, own{Your} isolated{Your team's} other{All}} LDAP user (account) changes are visualised here. The origin of the LDAP user change is an upstream modification on the remote LDAP server. The added or modified user is a result of the synchronisation process with this LDAP server.",
+                "properties": {
+                    "timestamp": "The time when the LDAP user was added or modified",
+                    "user": "The added or modified LDAP user",
+                    "action": "The action performed on the LDAP user"
+                }
+            },
+            "modal": {
+                "info": {
+                    "title": "LDAP user change: {item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}"
+                },
+                "edit": {
+                    "title": "edit LDAP user change: {item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}"
+                },
+                "delete": {
+                    "title": "are you sure you want to delete this LDAP user change?"
+                },
+                "create": {
+                    "title": "create LDAP user change"
+                }
+            },
+            "naming": {
+                "singular": "LDAP User Change",
+                "plural": "LDAP User Changes"
+            },
+            "presentation": {
+                "all": "{item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}",
+                "isolated": "{item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}",
+                "own": "{item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}"
+            },
+            "properties": {
+                "id": "identifier",
+                "timestamp": "time",
+                "user": "user",
+                "action": "action"
+            }
+        }
+    }
+}

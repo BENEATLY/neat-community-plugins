@@ -36,11 +36,11 @@ declare var $: any;
 
 
 // Component Definition
-@Component({selector: 'app-address', templateUrl: './address.component.html'})
+@Component({selector: 'app-ldapgroup', templateUrl: './ldapgroup.component.html'})
 
 
 // Component Export Definition
-export class AddressComponent implements OnInit {
+export class LDAPGroupComponent implements OnInit {
 
   // Libraries
   definitionsLib = definitionsLib;
@@ -52,8 +52,8 @@ export class AddressComponent implements OnInit {
   jquery = $;
 
   // Object Definitions (Non-Configurable)
-  objectName = 'Address';
-  objectDefinition = 'Address';
+  objectName = 'LDAPGroup';
+  objectDefinition = 'LDAPGroup';
 
   // Results (Non-Configurable)
   resultInfo = {'model': null};

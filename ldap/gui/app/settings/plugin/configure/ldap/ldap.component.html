@@ -1,0 +1,47 @@
+<!--
+    Author:     Thomas D'haenens
+    License:    GPL-3.0
+    Link:       https://github.com/BENEATLY/neat-community-plugins/
+    Contact:    https://neatly.be/
+-->
+
+
+<!-- Determine if Route is Allowed -->
+<div *ngIf="routeAllowed()" class="result-div with-footer">
+
+<!-- Navigation Header -->
+<app-template-navigation-header></app-template-navigation-header>
+
+<!-- Results -->
+<div class="results center">
+
+  <!-- Boxes -->
+  <div class="row nomargin justify">
+
+    <!-- Connection Group -->
+    <app-template-plugin-option-box [context]="context" [options]="pluginOptions" [group]="'Connection'"></app-template-plugin-option-box>
+
+    <!-- Linked Group -->
+    <app-template-plugin-option-box [context]="context" [options]="pluginOptions" [group]="'Linked'"></app-template-plugin-option-box>
+
+    <!-- Synchronisation Group -->
+    <app-template-plugin-option-box [xxlColWidth]="4" [xlColWidth]="4" [context]="context" [options]="pluginOptions" [group]="'Synchronisation'"></app-template-plugin-option-box>
+
+    <!-- LDAP Groups -->
+    <ng-container *ngIf="hasLdapGroupRights()">
+      <app-template-object-table-box [xxlColWidth]="8" [xlColWidth]="8" [context]="context" [title]="'settings.plugin.configure.ldap.groups'" [infoRef]="'settings.plugin.configure.ldap.info.groups'" [objectDefinition]="'LDAPGroup'" [model]="'ldapGroup'" [allowActions]="true"></app-template-object-table-box>
+    </ng-container>
+
+    <!-- Recent Changes -->
+    <ng-container *ngIf="hasLdapUserChangeRights()">
+      <app-template-object-table-box [context]="context" [title]="'settings.plugin.configure.ldap.recent-changes'" [infoRef]="'settings.plugin.configure.ldap.info.recent-changes'" [objectDefinition]="'LDAPUserChange'" [model]="'ldapUserChange'" [allowActions]="true"></app-template-object-table-box>
+    </ng-container>
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+<app-template-footer></app-template-footer>
+
+</div>

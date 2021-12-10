@@ -1,0 +1,19 @@
+{
+    "routes": [
+        {
+            "path": "settings/plugin/configure/ldap",
+            "component": "SettingsPluginConfigureLDAPComponent",
+            "type": "fixed-ref"
+        },
+        {
+            "path": "ldapgroup",
+            "component": "LDAPGroupComponent",
+            "type": "item"
+        },
+        {
+            "path": "ldapuserchange",
+            "component": "LDAPUserChangeComponent",
+            "type": "item"
+        }
+    ]
+}
