@@ -1,0 +1,84 @@
+#!/usr/local/bin/python
+
+################################################################################
+# Author:     Thomas D'haenens
+# License:    GPL-3.0
+# Link:       https://github.com/BENEATLY/neat-community-plugins/
+# Contact:    https://neatly.be/
+################################################################################
+
+
+# IMPORT: Standard Modules
+import sqlalchemy.sql.default_comparator                                                    # SQLAlchemy Default Comparator
+import sys                                                                                  # System Lib
+import ujson                                                                                # JSON Lib
+
+
+# FUNCTION: Read JSON File (No Logging)
+def readJSONFile(file):
+    with open(file, encoding='utf-8') as content:
+        return ujson.load(content)
+
+
+# CONFIGURATION: Determine Installation Location
+locationConfig = readJSONFile('/etc/neatly/base/location.json')
+
+# CONFIGURATION: Add Current Path to Default Python Paths
+sys.path.append(locationConfig['lib'])
+
+
+# IMPORT: Custom Modules
+from tables import *                                                                        # Tables Lib
+import actions                                                                              # Actions Lib
+from plugins import createPluginLogger                                                      # Plugins Lib
+
+
+# CONFIGURATION: Plugin
+pluginConfig = {'plugin': {'id': 17, 'name': 'Application Audit'}, 'logger': 'resources'}
+
+# CONFIGURATION: Create Logger
+logger = createPluginLogger(pluginConfig['plugin'], pluginConfig['logger'], makePreferred=True)
+
+# CONFIGURATION: Executor
+execParams = {'internal': True, 'source': 'Resources (Plugin: ' + pluginConfig['plugin']['name'] + ')'}
+
+
+# CREATE: DB Connection
+session = createDBSession()
+
+
+# GET: Current Plugin
+currentPlugin = session.query(Plugin).filter_by(id=pluginConfig['plugin']['id']).first()
+
+# GET: Root Team
+rootTeam = session.query(Team).filter_by(id=1).first()
+
+# INSERT: ApiObjects
+apiObjects = [
+    {'name': 'Activity'},
+    {'name': 'PluginAction'},
+    {'name': 'Transaction'}
+]
+[actions.createByDict(execParams, session, ApiObject, **apiObject) for apiObject in apiObjects]
+
+# GET: API Objects
+apiObjectList = session.query(ApiObject).all()
+apiObjectDict = {apiObject.name: apiObject for apiObject in apiObjectList}
+
+# GET: API Actions
+apiActionList = session.query(ApiAction).all()
+apiActionDict = {apiAction.name: apiAction for apiAction in apiActionList}
+
+# INSERT: Rights
+rights = [
+    {'apiObject': apiObjectDict['PluginAction'], 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'own': True, 'isolated': True, 'all': True},
+    {'apiObject': apiObjectDict['Activity'], 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'own': True, 'isolated': True, 'all': True},
+    {'apiObject': apiObjectDict['Transaction'], 'apiAction': apiActionDict['Get'], 'team': [rootTeam], 'function': [], 'own': True, 'isolated': True, 'all': True}
+]
+[actions.createByDict(execParams, session, Right, **right) for right in rights]
+
+# INSERT: Plugin Action Rights
+pluginActionRights = [
+    {'plugin': currentPlugin, 'action': 'view', 'team': [rootTeam], 'function': [], 'own': True, 'isolated': True, 'all': True}
+]
+[actions.createByDict(execParams, session, PluginActionRight, **pluginActionRight) for pluginActionRight in pluginActionRights]

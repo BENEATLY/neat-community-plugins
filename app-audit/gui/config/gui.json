@@ -1,0 +1,472 @@
+{
+    "definitions": {
+        "Object": {
+            "Activity": {
+                "properties": {
+                    "all": [
+                        {
+                            "accepted": {
+                                "type": "Number",
+                                "min": 0,
+                                "unit": "#"
+                            },
+                            "property": "id",
+                            "initialisable": false,
+                            "editable": false,
+                            "value": 0
+                        },
+                        {
+                            "accepted": {
+                                "type": "DateTime",
+                                "nullable": false
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "issuedAt",
+                            "sort": {
+                                "priority": 1,
+                                "order": false
+                            },
+                            "value": null
+                        },
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}user/list",
+                                "nullable": true,
+                                "presentation": "${firstName} ${lastName}",
+                                "type": "Id"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.user",
+                            "reference": "User",
+                            "linked": true,
+                            "value": {
+                                "id": null
+                            }
+                        },
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}plugin/list",
+                                "nullable": true,
+                                "presentation": "${name}",
+                                "type": "Id"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.plugin",
+                            "reference": "Plugin",
+                            "linked": true,
+                            "value": {
+                                "id": null
+                            }
+                        },
+                        {
+                            "accepted": {
+                                "max": 15,
+                                "nullable": true,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "column": false,
+                            "property": "transaction.clientAddress",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 99,
+                                "nullable": false,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.source",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 99,
+                                "nullable": false,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.description",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 80,
+                                "nullable": false,
+                                "restriction": [
+                                    "plain-chars"
+                                ],
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "tableName",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 20,
+                                "nullable": false,
+                                "restriction": [
+                                    "plain-chars"
+                                ],
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "verb",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "format": "json",
+                                "nullable": false,
+                                "type": "String",
+                                "na": true
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "column": false,
+                            "property": "originalData",
+                            "value": "{}"
+                        },
+                        {
+                            "accepted": {
+                                "format": "json",
+                                "nullable": false,
+                                "type": "String",
+                                "na": true
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "column": false,
+                            "property": "changedData",
+                            "value": "{}"
+                        }
+                    ],
+                    "isolated": [
+                        {
+                            "accepted": {
+                                "type": "Number",
+                                "min": 0,
+                                "unit": "#"
+                            },
+                            "property": "id",
+                            "initialisable": false,
+                            "editable": false,
+                            "value": 0
+                        },
+                        {
+                            "accepted": {
+                                "type": "DateTime",
+                                "nullable": false
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "issuedAt",
+                            "sort": {
+                                "priority": 1,
+                                "order": false
+                            },
+                            "value": null
+                        },
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}user/list",
+                                "nullable": true,
+                                "presentation": "${firstName} ${lastName}",
+                                "type": "Id"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.user",
+                            "reference": "User",
+                            "linked": true,
+                            "value": {
+                                "id": null
+                            }
+                        },
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}plugin/list",
+                                "nullable": true,
+                                "presentation": "${name}",
+                                "type": "Id"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.plugin",
+                            "reference": "Plugin",
+                            "linked": true,
+                            "value": {
+                                "id": null
+                            }
+                        },
+                        {
+                            "accepted": {
+                                "max": 15,
+                                "nullable": true,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "column": false,
+                            "property": "transaction.clientAddress",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 99,
+                                "nullable": false,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.source",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 99,
+                                "nullable": false,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.description",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 80,
+                                "nullable": false,
+                                "restriction": [
+                                    "plain-chars"
+                                ],
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "tableName",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 20,
+                                "nullable": false,
+                                "restriction": [
+                                    "plain-chars"
+                                ],
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "verb",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "format": "json",
+                                "nullable": false,
+                                "type": "String",
+                                "na": true
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "column": false,
+                            "property": "originalData",
+                            "value": "{}"
+                        },
+                        {
+                            "accepted": {
+                                "format": "json",
+                                "nullable": false,
+                                "type": "String",
+                                "na": true
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "column": false,
+                            "property": "changedData",
+                            "value": "{}"
+                        }
+                    ],
+                    "own": [
+                        {
+                            "accepted": {
+                                "type": "Number",
+                                "min": 0,
+                                "unit": "#"
+                            },
+                            "property": "id",
+                            "initialisable": false,
+                            "editable": false,
+                            "value": 0
+                        },
+                        {
+                            "accepted": {
+                                "type": "DateTime",
+                                "nullable": false
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "issuedAt",
+                            "sort": {
+                                "priority": 1,
+                                "order": false
+                            },
+                            "value": null
+                        },
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}plugin/list",
+                                "nullable": true,
+                                "presentation": "${name}",
+                                "type": "Id"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.plugin",
+                            "reference": "Plugin",
+                            "linked": true,
+                            "value": {
+                                "id": null
+                            }
+                        },
+                        {
+                            "accepted": {
+                                "max": 15,
+                                "nullable": true,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "column": false,
+                            "property": "transaction.clientAddress",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 99,
+                                "nullable": false,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.source",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 99,
+                                "nullable": false,
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "transaction.description",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 80,
+                                "nullable": false,
+                                "restriction": [
+                                    "plain-chars"
+                                ],
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "tableName",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "max": 20,
+                                "nullable": false,
+                                "restriction": [
+                                    "plain-chars"
+                                ],
+                                "type": "String"
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "property": "verb",
+                            "value": ""
+                        },
+                        {
+                            "accepted": {
+                                "format": "json",
+                                "nullable": false,
+                                "type": "String",
+                                "na": true
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "column": false,
+                            "property": "originalData",
+                            "value": "{}"
+                        },
+                        {
+                            "accepted": {
+                                "format": "json",
+                                "nullable": false,
+                                "type": "String",
+                                "na": true
+                            },
+                            "initialisable": false,
+                            "editable": false,
+                            "filterable": false,
+                            "sortable": false,
+                            "column": false,
+                            "property": "changedData",
+                            "value": "{}"
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "navigation": {
+        "leftbar": {
+            "settings": {
+                "activity": {
+                    "image": "svgs/compress-arrows.svg",
+                    "name": "leftbar.settings.activity",
+                    "rights": [
+                        {
+                            "action": "Get",
+                            "level": "own",
+                            "object": "Activity"
+                        }
+                    ],
+                    "pluginActionRights": [
+                        {
+                            "plugin": 17,
+                            "action": "view",
+                            "level": "all"
+                        }
+                    ],
+                    "routerLink": "settings/activity"
+                }
+            }
+        }
+    }
+}

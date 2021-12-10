@@ -1,0 +1,9 @@
+{
+    "routes": [
+        {
+            "path": "settings/activity",
+            "component": "SettingsActivityComponent",
+            "type": "fixed-ref"
+        }
+    ]
+}
