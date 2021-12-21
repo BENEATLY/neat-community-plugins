@@ -5,9 +5,7 @@
     "shortName": "ldap",
     "url": null,
     "configPage": "/settings/plugin/configure/ldap",
-    "required": [
-        7
-    ],
+    "required": [],
     "meta": {
         "translations": {
             "en-us": {
