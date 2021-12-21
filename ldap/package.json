@@ -1,0 +1,23 @@
+{
+    "id": 5,
+    "version": "1.0.0",
+    "name": "LDAP",
+    "shortName": "ldap",
+    "url": null,
+    "configPage": "/settings/plugin/configure/ldap",
+    "required": [
+        7
+    ],
+    "meta": {
+        "translations": {
+            "en-us": {
+                "description": "This plugin makes it possible to synchronise the users defined on an LDAP or AD server with the system. Authentication attempts will be validated by the remote LDAP or AD server.",
+                "tags": "Authentication"
+            },
+            "nl-be": {
+                "description": "Deze extensie maakt het mogelijk om de gebruikers die geconfigureerd staan op een LDAP- of AD-server te synchroniseren met het systeem. Aanmeldpogingen worden gevalideerd door de externe LDAP- of AD-server.",
+                "tags": "Authenticatie"
+            }
+        }
+    }
+}
