@@ -9,12 +9,20 @@
     "meta": {
         "translations": {
             "en-us": {
-                "description": "This plugins allows you to configure the look & feel of the GUI. You can change the name, icon and logo of the application.",
-                "tags": "GUI, Design"
+                "plugin": {
+                    "app-ui": {
+                        "description": "This plugins allows you to configure the look & feel of the GUI. You can change the name, icon and logo of the application.",
+                        "tags": "GUI, Design"
+                    }
+                }
             },
             "nl-be": {
-                "description": "Met deze extensie kunt u de GUI look & feel configureren. Je kan onder andere de naam, het icoon en het logo van de applicatie wijzigen.",
-                "tags": "GUI, Design"
+                "plugin": {
+                    "app-ui": {
+                        "description": "Met deze extensie kunt u de GUI look & feel configureren. Je kan onder andere de naam, het icoon en het logo van de applicatie wijzigen.",
+                        "tags": "GUI, Design"
+                    }
+                }
             }
         }
     }

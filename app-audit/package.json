@@ -9,12 +9,20 @@
     "meta": {
         "translations": {
             "en-us": {
-                "description": "This plugin tracks activity of users and plugin services. Activity can be browsed via the application GUI.",
-                "tags": "Audit, Monitoring"
+                "plugin": {
+                    "app-audit": {
+                        "description": "This plugin tracks activity of users and plugin services. Activity can be browsed via the application GUI.",
+                        "tags": "Audit, Monitoring"
+                    }
+                }
             },
             "nl-be": {
-                "description": "Via deze plugin kunnen activiteiten binnen de applicatie getraceert worden. De activiteiten van gebruikers en van extensie services kunnen bekeken worden in de applicatie GUI.",
-                "tags": "Audit, Monitoring"
+                "plugin": {
+                    "app-audit": {
+                        "description": "Via deze plugin kunnen activiteiten binnen de applicatie getraceert worden. De activiteiten van gebruikers en van extensie services kunnen bekeken worden in de applicatie GUI.",
+                        "tags": "Audit, Monitoring"
+                    }
+                }
             }
         }
     }
