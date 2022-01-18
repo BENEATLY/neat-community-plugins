@@ -57,7 +57,6 @@
                         "accepted": {
                             "type": "String",
                             "min": 5,
-                            "max": 90,
                             "nullable": false
                         }
                     }
@@ -74,7 +73,6 @@
                         "property": "message",
                         "accepted": {
                             "type": "String",
-                            "max": 150,
                             "nullable": false
                         }
                     },
