@@ -31,7 +31,7 @@
                 "properties": {
                     "UI": {
                         "appTitle": "The title of the application. This is displayed in the browser tab of application web page.",
-                        "appLogo": "The logo of the application. This logo is displayed within multiple web pages of the application (e.g. login screen, navigation bar, footer).",
+                        "appLogo": "The logo of the application. This logo is displayed within multiple web pages of the application (e.g. login screen, navigation bar).",
                         "appIcon": "The icon of the application. This is displayed in the browser tab of application web page.",
                         "contactLink": "When users are in need of support or contact, the application will refer to this URL. Users are redirected to this URL when clicking a contact/support button. These buttons are present on multiple pages within the application."
                     },

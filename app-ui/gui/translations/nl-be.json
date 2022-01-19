@@ -31,7 +31,7 @@
                 "properties": {
                     "UI": {
                         "appTitle": "De titel van de applicatie. Dit wordt weergegeven in de browser tab van de applicatie web pagina.",
-                        "appLogo": "Het logo van de applicatie. Dit logo wordt weergegeven binnen meerdere pagina's van de applicatie (v.b. login scherm, navigatiebar, footer).",
+                        "appLogo": "Het logo van de applicatie. Dit logo wordt weergegeven binnen meerdere pagina's van de applicatie (v.b. login scherm, navigatiebar).",
                         "appIcon": "Het icoon van de applicatie. Dit wordt weergegeven in de browser tab van de applicatie web pagina.",
                         "contactLink": "Als gebruikers nood hebben aan ondersteuning of indien ze je willen contacteren zal de applicatie ze refereren naar deze URL. Gebruikers worden automatisch doorverwezen naar deze URL wanneer ze op een ondersteunings- of contactknop klikken. Deze knoppen staan op verschillende pagina's binnen de applicatie."
                     },
