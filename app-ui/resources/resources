@@ -88,10 +88,10 @@ pluginOptionRights = [
 
 # INSERT: Plugin Options
 pluginOptions = [
-    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appTitle', 'nullable': False, 'public': True, 'rawValue': 'NEATLY - Application'},
-    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appLogo', 'nullable': False, 'public': True, 'rawValue': {'name': 'neatly-logo-white.png', 'reference': 'neatly-logo-white.png'}},
-    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appIcon', 'nullable': False, 'public': True, 'rawValue': {'name': 'neatly-icon-gradient.ico', 'reference': 'neatly-icon-gradient.ico'}},
-    {'plugin': currentPlugin, 'group': 'UI', 'option': 'contactLink', 'nullable': False, 'public': True, 'rawValue': 'https://neatly.be/'},
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appTitle', 'nullable': True, 'public': True, 'rawValue': None},
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appLogo', 'nullable': True, 'public': True, 'rawValue': None, 'objectName': 'File'},
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'appIcon', 'nullable': True, 'public': True, 'rawValue': None, 'objectName': 'File'},
+    {'plugin': currentPlugin, 'group': 'UI', 'option': 'contactLink', 'nullable': True, 'public': True, 'rawValue': None},
     {'plugin': currentPlugin, 'group': 'ImportantMessage', 'option': 'active', 'nullable': False, 'public': True, 'rawValue': False},
     {'plugin': currentPlugin, 'group': 'ImportantMessage', 'option': 'message', 'nullable': False, 'public': True, 'rawValue': 'Type your important message here.'},
     {'plugin': currentPlugin, 'group': 'ImportantMessage', 'option': 'backgroundColor', 'nullable': False, 'public': True, 'rawValue': '#D45651'},

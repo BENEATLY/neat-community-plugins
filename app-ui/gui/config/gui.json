@@ -9,7 +9,7 @@
                             "type": "String",
                             "min": 2,
                             "max": 30,
-                            "nullable": false
+                            "nullable": true
                         }
                     },
                     {
@@ -23,12 +23,11 @@
                             "restriction": [
                                 "secure-file-name"
                             ],
-                            "nullable": false,
+                            "nullable": true,
                             "upload": "plugin/16/action/logo"
                         },
                         "icon-only": true,
                         "download": {
-                            "link": "assets/logos/",
                             "enabled": true
                         }
                     },
@@ -43,12 +42,11 @@
                             "restriction": [
                                 "secure-file-name"
                             ],
-                            "nullable": false,
+                            "nullable": true,
                             "upload": "plugin/16/action/icon"
                         },
                         "icon-only": true,
                         "download": {
-                            "link": "assets/icons/",
                             "enabled": true
                         }
                     },
@@ -57,7 +55,7 @@
                         "accepted": {
                             "type": "String",
                             "min": 5,
-                            "nullable": false
+                            "nullable": true
                         }
                     }
                 ],
