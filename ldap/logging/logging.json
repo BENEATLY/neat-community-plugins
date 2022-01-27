@@ -8,6 +8,11 @@
                         "file": "api.log",
                         "level": "DEBUG"
                     },
+                    "auth": {
+                        "subPath": null,
+                        "file": "auth.log",
+                        "level": "DEBUG"
+                    },
                     "ldap-sync": {
                         "subPath": null,
                         "file": "ldap-sync.log",
