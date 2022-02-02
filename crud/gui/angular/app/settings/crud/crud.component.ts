@@ -32,6 +32,9 @@ import * as rightLib from '@library/right';
 import * as dataLib from '@library/data';
 import * as crudLib from '@plugin-library/8/crud';
 
+// Imports: Tools
+import * as cloneDeep from 'lodash/cloneDeep';
+
 
 // Declarations: JQuery
 declare var $: any;
@@ -96,13 +99,15 @@ export class SettingsCrudComponent implements OnInit {
   displayOptions = {};
 
   // CRUD Options (Non-Configurable)
-  crudOptions = {};
+  crudOptions: any[] = [];
+  filteredCrudOptions: any[] = [];
 
   // Custom Modal Libraries (Non-Configurable)
   modalLibs = {};
 
   // CRUD Plugin (Non-Configurable)
   crudSelector = {'apiObject': null};
+  crudPlaceHolder: string = '';
 
   // Context Reference
   context = this;
@@ -127,6 +132,14 @@ export class SettingsCrudComponent implements OnInit {
 
   // Page Initialisation
   ngOnInit() {
+
+    // Get CRUD Place Holder
+    this.crudPlaceHolder = this.translate.instant('settings.crud.selectobject');
+
+    // Get CRUD Options
+    let crudOptions = crudLib.applySelectPresentation(this.translate, crudLib.getAllowedAPIObjects(this.appConfig.config, this.data.userData.right));
+    this.crudOptions = crudOptions;
+    this.filteredCrudOptions = cloneDeep(crudOptions);
 
     // Update Results
     this.update();
@@ -159,18 +172,21 @@ export class SettingsCrudComponent implements OnInit {
 
   }
 
-  // Select Object
-  selectObject(option) {
+  // Update Selected API Object
+  updateSelectedApiObject() {
+
+    // Reset CRUD Place Holder
+    this.crudPlaceHolder = '';
 
     // Update Inputs
-    crudLib.selectAPIObject(this.appConfig.config, this.data.userData.right, this.crudSelector, this.sortingArray, this.filterArray, this.pageInfo, this.accessLevel, this.disabledLevel, option.name);
+    crudLib.selectAPIObject(this.appConfig.config, this.data.userData.right, this.crudSelector, this.sortingArray, this.filterArray, this.pageInfo, this.accessLevel, this.disabledLevel);
 
     // Set Object Definitions
     this.objectDefinition = this.crudSelector.apiObject;
     this.objectName = this.crudSelector.apiObject;
 
-    // Update
-    this.update();
+    // Trigger  Update
+    $('#update-required').trigger("update");
 
   }
 

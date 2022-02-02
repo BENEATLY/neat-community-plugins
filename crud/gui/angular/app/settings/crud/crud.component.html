@@ -16,17 +16,14 @@
   <ng-container left>
 
     <!-- Crud Object Selection -->
-    <div class="dropdown view-dropdown split">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownViewButton" data-toggle="dropdown">
-        <ng-container *ngIf="(!crudSelector.apiObject)">{{ 'settings.crud.selectobject' | translate | titlecase }}</ng-container>
-        <ng-container *ngIf="crudSelector.apiObject">{{ translateLib.constructSP(crudSelector.apiObject, 1) | translate | titlecase }}</ng-container>
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownViewButton">
-        <ng-container *ngFor="let option of crudLib.getAllowedAPIObjects(appConfig.config, data.userData.right)">
-          <a class="dropdown-item" (click)="selectObject(option)">{{ translateLib.constructSP(option.name, 1) | translate | titlecase }}</a>
-        </ng-container>
-      </div>
-    </div>
+    <mat-form-field class="in-navbar">
+      <mat-select selectDir [(ngModel)]="crudSelector.apiObject" [placeholder]="crudPlaceHolder" (selectionChange)="updateSelectedApiObject()">
+        <select-filter [searchPlaceHolder]="translate.instant('common.table.search')" [fullList]="crudOptions" [searchAttribute]="'_presentationValue'" (searchResult)="filteredCrudOptions = $event"></select-filter>
+        <mat-option *ngFor="let option of filteredCrudOptions" [value]="option.name">
+          {{ option._presentationValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
   </ng-container>
 

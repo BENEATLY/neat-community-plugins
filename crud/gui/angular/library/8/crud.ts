@@ -10,6 +10,10 @@
 import * as objLib from '@library/object';
 import * as formatLib from '@library/format';
 import * as definitionsLib from '@library/definitions';
+import * as sortLib from '@library/sort';
+import * as stringLib from '@library/string';
+import * as translateLib from '@library/translate';
+
 
 // Definitions
 let plugin = {'id': 8, 'name': 'CRUD'};
@@ -27,10 +31,21 @@ export function getAllowedAPIObjects(config, right) {
 }
 
 // Select API Object
-export async function selectAPIObject(config, right, crudSelector, sortingArray, filterArray, pageInfo, accessLevel, disabledLevel, apiObject) {
+export async function selectAPIObject(config, right, crudSelector, sortingArray, filterArray, pageInfo, accessLevel, disabledLevel) {
   crudSelector.apiObject = apiObject;
   sortingArray.model = {'attr': null, 'order': true};
   filterArray.model = [{'property': [null], 'comparator': null, 'ref': null, 'object': [crudSelector.apiObject], 'lastProperty': null}];
   pageInfo.model.page = 1;
   objLib.updateExistingDict(accessLevel, definitionsLib.createViewList(config, right, 'Get', crudSelector.apiObject, disabledLevel));
+}
+
+// Apply Select Presentation
+export function applySelectPresentation(translate, items) {
+
+  // Add Presentation Value
+  let modItems = items.map(item => ({ ...item, _presentationValue: stringLib.toTitleCase(translate.instant(translateLib.constructSP(item.name, 1))) }));
+
+  // Sort According to Presentation Value & Return
+  return sortLib.sortBy(modItems, '_presentationValue', true);
+
 }
