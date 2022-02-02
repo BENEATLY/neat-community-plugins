@@ -32,7 +32,6 @@ export function getAllowedAPIObjects(config, right) {
 
 // Select API Object
 export async function selectAPIObject(config, right, crudSelector, sortingArray, filterArray, pageInfo, accessLevel, disabledLevel) {
-  crudSelector.apiObject = apiObject;
   sortingArray.model = {'attr': null, 'order': true};
   filterArray.model = [{'property': [null], 'comparator': null, 'ref': null, 'object': [crudSelector.apiObject], 'lastProperty': null}];
   pageInfo.model.page = 1;
