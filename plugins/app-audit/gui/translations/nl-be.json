@@ -1,0 +1,72 @@
+{
+    "leftbar": {
+        "settings": {
+            "activity": "Activiteiten"
+        }
+    }, 
+    "object": {
+        "Activity": {
+            "help": {
+                "intro": "{right, select, own{Je eigen} isolated{Je groep's} other{alle}} activiteiten worden hier weergegeven. Een activiteit is een uitgevoerde actie die getriggered werd door een gebruiker of door een service van een extensie.", 
+                "properties": {
+                    "changedData": "De gewijzigde data na de uitvoering van de activiteit", 
+                    "id": "De identificatie van de activiteit", 
+                    "issuedAt": "Het tijdstip waarop de activiteit werd uitgevoerd", 
+                    "originalData": "De originele data alvorens de uitvoering van de activiteit", 
+                    "tableName": "De naam van de tabel die betrokken is bij de activiteit", 
+                    "transaction": {
+                        "clientAddress": "Het IP adres vanwaar de activiteit werd getriggered", 
+                        "description": "De beschrijving van de activiteit", 
+                        "plugin": "De plugin die de activiteit heeft getriggered", 
+                        "source": "De oorsprong vanwaar de activiteit trigger kwam", 
+                        "user": "De gebruiker die de activiteit heeft getriggered"
+                    }, 
+                    "verb": "De actie die uitgevoerd werd op de tabel"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "cre\u00eber activiteit"
+                }, 
+                "delete": {
+                    "title": "ben je zeker dat je deze activiteit wil verwijderen?"
+                }, 
+                "edit": {
+                    "title": "wijzig activiteit: {item, property, id}"
+                }, 
+                "info": {
+                    "title": "activiteit: {item, property, id}"
+                }
+            }, 
+            "naming": {
+                "plural": "Activiteiten", 
+                "singular": "Activiteit"
+            }, 
+            "presentation": {
+                "all": "{item, property, id} ({item, property, issuedAt})", 
+                "isolated": "{item, property, id} ({item, property, issuedAt})", 
+                "own": "{item, property, id} ({item, property, issuedAt})"
+            }, 
+            "properties": {
+                "changedData": "gewijzigde data", 
+                "id": "identificatie", 
+                "issuedAt": "tijd", 
+                "originalData": "originele data", 
+                "tableName": "tabel", 
+                "transaction": {
+                    "clientAddress": "IP-adres", 
+                    "description": "beschrijving", 
+                    "plugin": "extensie", 
+                    "source": "bron", 
+                    "user": "gebruiker"
+                }, 
+                "verb": "tabel actienaam"
+            }
+        }
+    }, 
+    "settings": {
+        "activity": {
+            "pagetitle": "Activiteiten"
+        }
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "unqueryable": [
+        "Action", 
+        "Transaction"
+    ]
+}

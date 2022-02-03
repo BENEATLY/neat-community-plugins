@@ -1,0 +1,437 @@
+{
+    "class": {
+        "Address": {
+            "function": {}, 
+            "generated": {
+                "column": {}, 
+                "hybrid": {}
+            }, 
+            "option": {
+                "handler": null, 
+                "options": {
+                    "all": {}, 
+                    "common": {}, 
+                    "isolated": {}, 
+                    "own": {}
+                }
+            }, 
+            "private": {
+                "__tablename__": "address", 
+                "__versioned__": {}
+            }, 
+            "properties": {
+                "filters": {
+                    "filterable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "street", 
+                            "nr", 
+                            "postalCode", 
+                            "city", 
+                            "country", 
+                            "coordinate"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }, 
+                    "rights": {
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "finiteBreak": [], 
+                "joins": [
+                    "country"
+                ], 
+                "notEditable": {
+                    "all": [], 
+                    "common": [
+                        "id"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "notInitialisable": {
+                    "all": [], 
+                    "common": [
+                        "id"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "public": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "street", 
+                        "nr", 
+                        "postalCode", 
+                        "city", 
+                        "country", 
+                        "coordinate"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "sorts": {
+                    "default": {
+                        "order": true, 
+                        "property": "country"
+                    }, 
+                    "sortable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "street", 
+                            "nr", 
+                            "postalCode", 
+                            "city", 
+                            "country", 
+                            "coordinate"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "timeSeries": false, 
+                "unique": []
+            }, 
+            "table": {
+                "direct": {
+                    "city": {
+                        "doc": "City", 
+                        "nullable": false, 
+                        "parameter": 80, 
+                        "type": "String"
+                    }, 
+                    "id": {
+                        "doc": "UID", 
+                        "primary_key": true, 
+                        "type": "Integer"
+                    }, 
+                    "nr": {
+                        "doc": "Number", 
+                        "nullable": false, 
+                        "parameter": 10, 
+                        "type": "String"
+                    }, 
+                    "postalCode": {
+                        "doc": "Postal Code", 
+                        "nullable": false, 
+                        "parameter": 12, 
+                        "type": "String"
+                    }, 
+                    "street": {
+                        "doc": "Street", 
+                        "nullable": false, 
+                        "parameter": 80, 
+                        "type": "String"
+                    }
+                }, 
+                "idReference": {
+                    "coordinate_id": {
+                        "doc": "Coordinate (ID reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "id", 
+                                "object": "Coordinate"
+                            }, 
+                            "ondelete": "SET NULL", 
+                            "onupdate": "CASCADE"
+                        }, 
+                        "nullable": true
+                    }, 
+                    "country_id": {
+                        "doc": "Country (ID reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "id", 
+                                "object": "Country"
+                            }, 
+                            "ondelete": "CASCADE", 
+                            "onupdate": "CASCADE"
+                        }, 
+                        "nullable": false
+                    }
+                }, 
+                "reference": {
+                    "coordinate": {
+                        "backPopulates": "address", 
+                        "doc": "Coordinate (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "coordinate_id", 
+                                "object": "Address"
+                            }
+                        }, 
+                        "relatedObject": "Coordinate"
+                    }, 
+                    "country": {
+                        "backPopulates": "address", 
+                        "doc": "Country (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "country_id", 
+                                "object": "Address"
+                            }
+                        }, 
+                        "relatedObject": "Country"
+                    }
+                }
+            }, 
+            "trigger": []
+        }, 
+        "Coordinate": {
+            "function": {}, 
+            "generated": {
+                "column": {}, 
+                "hybrid": {}
+            }, 
+            "option": {
+                "handler": null, 
+                "options": {
+                    "all": {}, 
+                    "common": {}, 
+                    "isolated": {}, 
+                    "own": {}
+                }
+            }, 
+            "private": {
+                "__tablename__": "coordinate", 
+                "__versioned__": {}
+            }, 
+            "properties": {
+                "filters": {
+                    "filterable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "latitude", 
+                            "longitude", 
+                            "elevation"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }, 
+                    "rights": {
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "finiteBreak": [], 
+                "joins": [], 
+                "notEditable": {
+                    "all": [], 
+                    "common": [
+                        "id"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "notInitialisable": {
+                    "all": [], 
+                    "common": [
+                        "id"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "public": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "latitude", 
+                        "longitude", 
+                        "elevation"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "sorts": {
+                    "default": {
+                        "order": true, 
+                        "property": "id"
+                    }, 
+                    "sortable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "latitude", 
+                            "longitude", 
+                            "elevation"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "timeSeries": false, 
+                "unique": []
+            }, 
+            "table": {
+                "direct": {
+                    "elevation": {
+                        "doc": "Elevation", 
+                        "nullable": true, 
+                        "type": "Float"
+                    }, 
+                    "id": {
+                        "doc": "UID", 
+                        "primary_key": true, 
+                        "type": "Integer"
+                    }, 
+                    "latitude": {
+                        "doc": "Latitude", 
+                        "nullable": false, 
+                        "type": "Float"
+                    }, 
+                    "longitude": {
+                        "doc": "Longitude", 
+                        "nullable": false, 
+                        "type": "Float"
+                    }
+                }, 
+                "idReference": {}, 
+                "reference": {
+                    "address": {
+                        "backPopulates": "coordinate", 
+                        "doc": "Address (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "coordinate_id", 
+                                "object": "Address"
+                            }
+                        }, 
+                        "relatedObject": "Address"
+                    }
+                }
+            }, 
+            "trigger": []
+        }, 
+        "Country": {
+            "function": {}, 
+            "generated": {
+                "column": {}, 
+                "hybrid": {}
+            }, 
+            "option": {
+                "handler": null, 
+                "options": {
+                    "all": {}, 
+                    "common": {}, 
+                    "isolated": {}, 
+                    "own": {}
+                }
+            }, 
+            "private": {
+                "__tablename__": "country", 
+                "__versioned__": {}
+            }, 
+            "properties": {
+                "filters": {
+                    "filterable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "countryCode", 
+                            "name"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }, 
+                    "rights": {
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "finiteBreak": [], 
+                "joins": [], 
+                "notEditable": {
+                    "all": [], 
+                    "common": [
+                        "id"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "notInitialisable": {
+                    "all": [], 
+                    "common": [
+                        "id"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "public": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "countryCode", 
+                        "name"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "sorts": {
+                    "default": {
+                        "order": true, 
+                        "property": "name"
+                    }, 
+                    "sortable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "countryCode", 
+                            "name"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "timeSeries": false, 
+                "unique": [
+                    "countryCode", 
+                    "name"
+                ]
+            }, 
+            "table": {
+                "direct": {
+                    "countryCode": {
+                        "doc": "Country Code", 
+                        "nullable": false, 
+                        "parameter": 5, 
+                        "type": "String", 
+                        "unique": true
+                    }, 
+                    "id": {
+                        "doc": "UID", 
+                        "primary_key": true, 
+                        "type": "Integer"
+                    }, 
+                    "name": {
+                        "doc": "Name", 
+                        "nullable": false, 
+                        "parameter": 80, 
+                        "type": "String", 
+                        "unique": true
+                    }
+                }, 
+                "idReference": {}, 
+                "reference": {
+                    "address": {
+                        "backPopulates": "country", 
+                        "doc": "Address (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "country_id", 
+                                "object": "Address"
+                            }
+                        }, 
+                        "relatedObject": "Address"
+                    }
+                }
+            }, 
+            "trigger": []
+        }
+    }
+}

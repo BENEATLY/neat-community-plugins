@@ -1,0 +1,548 @@
+{
+    "class": {
+        "ApiAction": {
+            "table": {
+                "reference": {
+                    "ldapUserChange": {
+                        "backPopulates": "action", 
+                        "doc": "LDAPUserChange (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "action_id", 
+                                "object": "LDAPUserChange"
+                            }
+                        }, 
+                        "relatedObject": "LDAPUserChange"
+                    }
+                }
+            }
+        }, 
+        "Function": {
+            "table": {
+                "reference": {
+                    "ldapGroup": {
+                        "backPopulates": "function", 
+                        "doc": "LDAPGroup (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "function_id", 
+                                "object": "LDAPGroup"
+                            }
+                        }, 
+                        "relatedObject": "LDAPGroup"
+                    }
+                }
+            }
+        }, 
+        "LDAPGroup": {
+            "function": {}, 
+            "generated": {
+                "column": {}, 
+                "hybrid": {}
+            }, 
+            "option": {
+                "handler": null, 
+                "options": {
+                    "all": {}, 
+                    "common": {}, 
+                    "isolated": {}, 
+                    "own": {}
+                }
+            }, 
+            "private": {
+                "__tablename__": "ldap_group", 
+                "__versioned__": {}
+            }, 
+            "properties": {
+                "filters": {
+                    "filterable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "team", 
+                            "function", 
+                            "path", 
+                            "syncStatus"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }, 
+                    "rights": {
+                        "isolated": [
+                            {
+                                "operator": "OR", 
+                                "statements": [
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function.user.team"
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function.user.team"
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team", 
+                                                "value": null
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function", 
+                                                "value": null
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function", 
+                                                "value": null
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team", 
+                                                "value": null
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "own": [
+                            {
+                                "operator": "OR", 
+                                "statements": [
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function.user"
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team", 
+                                                "type": "isolated"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function.user"
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team", 
+                                                "value": null
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function", 
+                                                "value": null
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team", 
+                                                "type": "isolated"
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "operator": "AND", 
+                                        "statements": [
+                                            {
+                                                "attr": "id", 
+                                                "sub": "function", 
+                                                "value": null
+                                            }, 
+                                            {
+                                                "attr": "id", 
+                                                "sub": "team", 
+                                                "value": null
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }, 
+                "finiteBreak": [], 
+                "joins": [
+                    "team", 
+                    "function"
+                ], 
+                "notEditable": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "syncStatus"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "notInitialisable": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "syncStatus"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "public": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "team", 
+                        "function", 
+                        "path", 
+                        "syncStatus"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "sorts": {
+                    "default": {
+                        "order": true, 
+                        "property": "team"
+                    }, 
+                    "sortable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "team", 
+                            "function", 
+                            "path", 
+                            "syncStatus"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "timeSeries": false, 
+                "unique": [
+                    "path"
+                ]
+            }, 
+            "table": {
+                "direct": {
+                    "id": {
+                        "doc": "UID", 
+                        "primary_key": true, 
+                        "type": "Integer"
+                    }, 
+                    "path": {
+                        "doc": "LDAP Path", 
+                        "nullable": false, 
+                        "type": "String", 
+                        "unique": true
+                    }, 
+                    "syncStatus": {
+                        "doc": "Synchronisation Status", 
+                        "nullable": true, 
+                        "type": "Boolean"
+                    }
+                }, 
+                "idReference": {
+                    "function_id": {
+                        "doc": "Function (ID reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "id", 
+                                "object": "Function"
+                            }, 
+                            "ondelete": "CASCADE", 
+                            "onupdate": "CASCADE"
+                        }, 
+                        "nullable": false
+                    }, 
+                    "team_id": {
+                        "doc": "Team (ID reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "id", 
+                                "object": "Team"
+                            }, 
+                            "ondelete": "CASCADE", 
+                            "onupdate": "CASCADE"
+                        }, 
+                        "nullable": false
+                    }
+                }, 
+                "reference": {
+                    "function": {
+                        "backPopulates": "ldapGroup", 
+                        "doc": "Function (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "function_id", 
+                                "object": "LDAPGroup"
+                            }
+                        }, 
+                        "relatedObject": "Function"
+                    }, 
+                    "team": {
+                        "backPopulates": "ldapGroup", 
+                        "doc": "Team (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "team_id", 
+                                "object": "LDAPGroup"
+                            }
+                        }, 
+                        "relatedObject": "Team"
+                    }
+                }
+            }, 
+            "trigger": []
+        }, 
+        "LDAPUserChange": {
+            "function": {}, 
+            "generated": {
+                "column": {}, 
+                "hybrid": {}
+            }, 
+            "option": {
+                "handler": null, 
+                "options": {
+                    "all": {}, 
+                    "common": {}, 
+                    "isolated": {}, 
+                    "own": {}
+                }
+            }, 
+            "private": {
+                "__tablename__": "ldap_user_change", 
+                "__versioned__": {}
+            }, 
+            "properties": {
+                "filters": {
+                    "filterable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "timestamp", 
+                            "user", 
+                            "action"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }, 
+                    "rights": {
+                        "isolated": [
+                            {
+                                "attr": "id", 
+                                "sub": "user.team"
+                            }
+                        ], 
+                        "own": [
+                            {
+                                "attr": "id", 
+                                "sub": "user"
+                            }
+                        ]
+                    }
+                }, 
+                "finiteBreak": [
+                    [
+                        "user", 
+                        "file"
+                    ], 
+                    [
+                        "user", 
+                        "image"
+                    ]
+                ], 
+                "joins": [
+                    "user", 
+                    "user.team", 
+                    "action"
+                ], 
+                "notEditable": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "timestamp", 
+                        "user", 
+                        "action"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "notInitialisable": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "timestamp"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "public": {
+                    "all": [], 
+                    "common": [
+                        "id", 
+                        "timestamp", 
+                        "user", 
+                        "action"
+                    ], 
+                    "isolated": [], 
+                    "own": []
+                }, 
+                "sorts": {
+                    "default": {
+                        "order": false, 
+                        "property": "timestamp"
+                    }, 
+                    "sortable": {
+                        "all": [], 
+                        "common": [
+                            "id", 
+                            "timestamp", 
+                            "user", 
+                            "action"
+                        ], 
+                        "isolated": [], 
+                        "own": []
+                    }
+                }, 
+                "timeSeries": false, 
+                "unique": []
+            }, 
+            "table": {
+                "direct": {
+                    "id": {
+                        "doc": "UID", 
+                        "primary_key": true, 
+                        "type": "Integer"
+                    }, 
+                    "timestamp": {
+                        "default": {
+                            "function": "utcnow", 
+                            "module": "datetime"
+                        }, 
+                        "doc": "Timestamp", 
+                        "type": "DateTime"
+                    }
+                }, 
+                "idReference": {
+                    "action_id": {
+                        "doc": "ApiAction (ID reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "id", 
+                                "object": "ApiAction"
+                            }, 
+                            "ondelete": "CASCADE", 
+                            "onupdate": "CASCADE"
+                        }, 
+                        "nullable": false
+                    }, 
+                    "user_id": {
+                        "doc": "User (ID reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "id", 
+                                "object": "User"
+                            }, 
+                            "ondelete": "CASCADE", 
+                            "onupdate": "CASCADE"
+                        }, 
+                        "nullable": false
+                    }
+                }, 
+                "reference": {
+                    "action": {
+                        "backPopulates": "ldapUserChange", 
+                        "doc": "ApiAction (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "action_id", 
+                                "object": "LDAPUserChange"
+                            }
+                        }, 
+                        "relatedObject": "ApiAction"
+                    }, 
+                    "user": {
+                        "backPopulates": "ldapUserChange", 
+                        "doc": "User (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "user_id", 
+                                "object": "LDAPUserChange"
+                            }
+                        }, 
+                        "relatedObject": "User"
+                    }
+                }
+            }, 
+            "trigger": []
+        }, 
+        "Team": {
+            "table": {
+                "reference": {
+                    "ldapGroup": {
+                        "backPopulates": "team", 
+                        "doc": "LDAPGroup (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "team_id", 
+                                "object": "LDAPGroup"
+                            }
+                        }, 
+                        "relatedObject": "LDAPGroup"
+                    }
+                }
+            }
+        }, 
+        "User": {
+            "table": {
+                "reference": {
+                    "ldapUserChange": {
+                        "backPopulates": "user", 
+                        "doc": "LDAPUserChange (reference)", 
+                        "foreignKey": {
+                            "column": {
+                                "attribute": "user_id", 
+                                "object": "LDAPUserChange"
+                            }
+                        }, 
+                        "relatedObject": "LDAPUserChange"
+                    }
+                }
+            }
+        }
+    }
+}

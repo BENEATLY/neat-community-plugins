@@ -1,0 +1,15 @@
+{
+    "loggers": {
+        "plugin": {
+            "plugins": {
+                "8": {
+                    "resources": {
+                        "file": "resources.log", 
+                        "level": "DEBUG", 
+                        "subPath": null
+                    }
+                }
+            }
+        }
+    }
+}

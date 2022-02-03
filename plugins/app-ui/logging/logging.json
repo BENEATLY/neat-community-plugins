@@ -1,0 +1,20 @@
+{
+    "loggers": {
+        "plugin": {
+            "plugins": {
+                "16": {
+                    "api": {
+                        "file": "api.log", 
+                        "level": "DEBUG", 
+                        "subPath": null
+                    }, 
+                    "resources": {
+                        "file": "resources.log", 
+                        "level": "DEBUG", 
+                        "subPath": null
+                    }
+                }
+            }
+        }
+    }
+}

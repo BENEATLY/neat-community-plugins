@@ -1,0 +1,23 @@
+{
+    "navigation": {
+        "leftbar": {
+            "settings": {
+                "crud": {
+                    "image": "svgs/feather.svg", 
+                    "leftOffset": 1, 
+                    "name": "leftbar.settings.crud", 
+                    "order": 1000, 
+                    "pluginActionRights": [
+                        {
+                            "action": "use", 
+                            "level": "all", 
+                            "plugin": 8
+                        }
+                    ], 
+                    "routerLink": "settings/crud", 
+                    "topOffset": -4
+                }
+            }
+        }
+    }
+}

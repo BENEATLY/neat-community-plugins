@@ -1,0 +1,125 @@
+{
+    "object": {
+        "Address": {
+            "help": {
+                "intro": "{right, select, own{Your own} isolated{Your team's} other{All}} addresses are visualised here.", 
+                "properties": {
+                    "city": "The name of the city where the address is located", 
+                    "coordinate": "The coordinates corresponding to the address", 
+                    "country": "The country where the address is located", 
+                    "nr": "The house number of the address", 
+                    "postalCode": "The ZIP/postal code of the city", 
+                    "street": "The street of the address"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "create address"
+                }, 
+                "delete": {
+                    "title": "are you sure you want to delete this address?"
+                }, 
+                "edit": {
+                    "title": "edit address: [{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]"
+                }, 
+                "info": {
+                    "title": "address: [{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]"
+                }
+            }, 
+            "naming": {
+                "plural": "Addresses", 
+                "singular": "Address"
+            }, 
+            "presentation": {
+                "all": "[{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]", 
+                "isolated": "[{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]", 
+                "own": "[{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]"
+            }, 
+            "properties": {
+                "city": "city", 
+                "coordinate": "coordinate", 
+                "country": "country", 
+                "id": "identifier", 
+                "nr": "number", 
+                "postalCode": "ZIP/postal code", 
+                "street": "street"
+            }
+        }, 
+        "Coordinate": {
+            "help": {
+                "intro": "{right, select, own{Your own} isolated{Your team's} other{All}} coordinates are listed here.", 
+                "properties": {
+                    "elevation": "The elevation of the coordinate", 
+                    "latitude": "The latitude of the coordinate", 
+                    "longitude": "The longitude of the coordinate"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "create coordinate"
+                }, 
+                "delete": {
+                    "title": "are you sure you want to delete this coordinate?"
+                }, 
+                "edit": {
+                    "title": "edit coordinate: [{item, property, latitude}, {item, property, longitude}, {item, property, elevation}]"
+                }, 
+                "info": {
+                    "title": "coordinate: [{item, property, latitude}, {item, property, longitude}, {item, property, elevation}]"
+                }
+            }, 
+            "naming": {
+                "plural": "Coordinates", 
+                "singular": "Coordinate"
+            }, 
+            "presentation": {
+                "all": "[{item, property, latitude}, {item, property, longitude}, {item, property, elevation}]", 
+                "isolated": "[{item, property, latitude}, {item, property, longitude}, {item, property, elevation}]", 
+                "own": "[{item, property, latitude}, {item, property, longitude}, {item, property, elevation}]"
+            }, 
+            "properties": {
+                "elevation": "elevation", 
+                "id": "identifier", 
+                "latitude": "latitude", 
+                "longitude": "longitude"
+            }
+        }, 
+        "Country": {
+            "help": {
+                "intro": "{right, select, own{Your own} isolated{Your team's} other{All}} countries are visualised here.", 
+                "properties": {
+                    "countryCode": "The code of the country", 
+                    "name": "The name of the country"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "create country"
+                }, 
+                "delete": {
+                    "title": "are you sure you want to delete this country?"
+                }, 
+                "edit": {
+                    "title": "edit country: {item, property, name}"
+                }, 
+                "info": {
+                    "title": "country: {item, property, name}"
+                }
+            }, 
+            "naming": {
+                "plural": "Countries", 
+                "singular": "Country"
+            }, 
+            "presentation": {
+                "all": "{item, property, name}", 
+                "isolated": "{item, property, name}", 
+                "own": "{item, property, name}"
+            }, 
+            "properties": {
+                "countryCode": "country code", 
+                "id": "identifier", 
+                "name": "name"
+            }
+        }
+    }
+}

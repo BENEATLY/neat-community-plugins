@@ -1,0 +1,68 @@
+#!/usr/local/bin/python
+
+################################################################################
+# Author:     Thomas D'haenens
+# License:    GPL-3.0
+# Link:       https://github.com/BENEATLY/neat-community/
+# Contact:    https://neatly.be/
+################################################################################
+
+
+# IMPORT: Standard Modules
+import sys                                                                                      # System Lib
+import json                                                                                     # JSON Lib
+import os                                                                                       # OS Lib
+
+
+# FUNCTION: Read JSON File
+def readJSONFile(file):
+    with open(file) as content:
+        return json.load(content)
+
+# FUNCTION: Write Clean JSON File
+def writeCleanJSONFile(file, info):
+    with open(file, 'w+') as content:
+        json.dump(info, content, indent=4, sort_keys=True)
+
+# FUNCTION: Beautify
+def beautify(filePath):
+
+    # File Exists
+    if (os.path.isfile(filePath)):
+
+        # Read Contents
+        contents = readJSONFile(filePath)
+
+        # Write (Clean) Contents to File
+        writeCleanJSONFile(filePath, contents)
+
+        # Message
+        print('-> Beautified file: ' + filePath)
+
+    # File Doesn't Exist
+    else:
+
+        # Message
+        print('-> Missing file: ' + filePath)
+
+
+# DETERMINE: Source Folder
+scriptFolder = os.path.dirname(os.path.abspath(__file__))
+sourceFolder = os.path.abspath(os.path.join(scriptFolder, '../plugins')) + '/'
+
+
+# ITERATE: Source Files
+for root, dirs, files in os.walk(sourceFolder):
+
+    # Iterate over Files
+    for file in files:
+
+        # Is JSON File
+        if (file.endswith('.json')):
+
+            # Beautify File
+            beautify(os.path.join(root, file))
+
+
+# End Message
+print('-> Beautified all config files')

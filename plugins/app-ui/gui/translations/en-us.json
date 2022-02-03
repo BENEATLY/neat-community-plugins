@@ -1,0 +1,60 @@
+{
+    "leftbar": {
+        "settings": {
+            "plugin": {
+                "configure": {
+                    "app-ui": "App UI"
+                }
+            }
+        }
+    }, 
+    "plugins": {
+        "16": {
+            "ImportantMessage": {
+                "active": "Active", 
+                "backgroundColor": "Background Color", 
+                "inAppOnly": "Authenticated Only", 
+                "message": "Message"
+            }, 
+            "UI": {
+                "appIcon": "Application icon", 
+                "appLogo": "Application logo", 
+                "appTitle": "Application title", 
+                "contactLink": "Contact URL"
+            }, 
+            "groups": {
+                "ImportantMessage": "Display Important Message", 
+                "UI": "Common Application Appearance"
+            }, 
+            "help": {
+                "intro": {
+                    "ImportantMessage": "Using this box, you can configure an important message. This message will be displayed in the top part of the application for all users. The content in the important message is limited to a single line.", 
+                    "UI": "This box contains the common properties related to the appearance of the application."
+                }, 
+                "properties": {
+                    "ImportantMessage": {
+                        "active": "This indicates if the important message is getting displayed to all users (active). While disabled, no important message gets shown.", 
+                        "backgroundColor": "The color of the background box used to display the important message.", 
+                        "inAppOnly": "If this is enabled, the important message will only be displayed to authenticated users (on non-public pages). When disabled, the message will also be displayed on public pages (for all visitors).", 
+                        "message": "The content of the important message. HTML-syntax can be used to adjust the style of the message."
+                    }, 
+                    "UI": {
+                        "appIcon": "The icon of the application. This is displayed in the browser tab of application web page.", 
+                        "appLogo": "The logo of the application. This logo is displayed within multiple web pages of the application (e.g. login screen, navigation bar).", 
+                        "appTitle": "The title of the application. This is displayed in the browser tab of application web page.", 
+                        "contactLink": "When users are in need of support or contact, the application will refer to this URL. Users are redirected to this URL when clicking a contact/support button. These buttons are present on multiple pages within the application."
+                    }
+                }
+            }
+        }
+    }, 
+    "settings": {
+        "plugin": {
+            "configure": {
+                "app-ui": {
+                    "pagetitle": "Look & Feel"
+                }
+            }
+        }
+    }
+}

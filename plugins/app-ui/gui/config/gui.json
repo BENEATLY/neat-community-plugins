@@ -1,0 +1,122 @@
+{
+    "definitions": {
+        "Plugin": {
+            "16": {
+                "ImportantMessage": [
+                    {
+                        "accepted": {
+                            "nullable": false, 
+                            "type": "Boolean"
+                        }, 
+                        "property": "active"
+                    }, 
+                    {
+                        "accepted": {
+                            "nullable": false, 
+                            "type": "String"
+                        }, 
+                        "property": "message"
+                    }, 
+                    {
+                        "accepted": {
+                            "format": "hexColor", 
+                            "max": 7, 
+                            "nullable": false, 
+                            "type": "String"
+                        }, 
+                        "property": "backgroundColor"
+                    }, 
+                    {
+                        "accepted": {
+                            "nullable": false, 
+                            "type": "Boolean"
+                        }, 
+                        "property": "inAppOnly"
+                    }
+                ], 
+                "UI": [
+                    {
+                        "accepted": {
+                            "max": 30, 
+                            "min": 2, 
+                            "nullable": true, 
+                            "type": "String"
+                        }, 
+                        "property": "appTitle"
+                    }, 
+                    {
+                        "accepted": {
+                            "format": "image/*", 
+                            "max": 50, 
+                            "min": 5, 
+                            "multiple": false, 
+                            "nullable": true, 
+                            "restriction": [
+                                "secure-file-name"
+                            ], 
+                            "type": "File", 
+                            "upload": "plugin/16/action/logo"
+                        }, 
+                        "download": {
+                            "enabled": true
+                        }, 
+                        "icon-only": true, 
+                        "property": "appLogo"
+                    }, 
+                    {
+                        "accepted": {
+                            "format": "image/x-icon", 
+                            "max": 50, 
+                            "min": 5, 
+                            "multiple": false, 
+                            "nullable": true, 
+                            "restriction": [
+                                "secure-file-name"
+                            ], 
+                            "type": "File", 
+                            "upload": "plugin/16/action/icon"
+                        }, 
+                        "download": {
+                            "enabled": true
+                        }, 
+                        "icon-only": true, 
+                        "property": "appIcon"
+                    }, 
+                    {
+                        "accepted": {
+                            "min": 5, 
+                            "nullable": true, 
+                            "type": "String"
+                        }, 
+                        "property": "contactLink"
+                    }
+                ]
+            }
+        }
+    }, 
+    "navigation": {
+        "leftbar": {
+            "settings": {
+                "plugins": {
+                    "subItems": {
+                        "configure": {
+                            "subItems": {
+                                "app-ui": {
+                                    "name": "leftbar.settings.plugin.configure.app-ui", 
+                                    "pluginActionRights": [
+                                        {
+                                            "action": "use", 
+                                            "level": "all", 
+                                            "plugin": 16
+                                        }
+                                    ], 
+                                    "routerLink": "settings/plugin/configure/app-ui"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

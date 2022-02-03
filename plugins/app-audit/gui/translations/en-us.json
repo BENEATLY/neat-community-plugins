@@ -1,0 +1,72 @@
+{
+    "leftbar": {
+        "settings": {
+            "activity": "Activities"
+        }
+    }, 
+    "object": {
+        "Activity": {
+            "help": {
+                "intro": "{right, select, own{Your own} isolated{Your team's} other{All}} activities are visualised here. An activity is an executed action that's triggered via a user or via a plugin service.", 
+                "properties": {
+                    "changedData": "The modified data after the activity is completed", 
+                    "id": "The identifier of the activity", 
+                    "issuedAt": "The time when the activity was issued", 
+                    "originalData": "The original data before the activity got issued", 
+                    "tableName": "The name of the table involved in the activity", 
+                    "transaction": {
+                        "clientAddress": "The IP address where the activity was triggered from", 
+                        "description": "The description of the activity", 
+                        "plugin": "The plugin triggering the activity", 
+                        "source": "The source where the activity resides from", 
+                        "user": "The user triggering the activity"
+                    }, 
+                    "verb": "The action performed on the table"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "create activity"
+                }, 
+                "delete": {
+                    "title": "are you sure you want to delete this activity?"
+                }, 
+                "edit": {
+                    "title": "edit activity: {item, property, id}"
+                }, 
+                "info": {
+                    "title": "activity: {item, property, id}"
+                }
+            }, 
+            "naming": {
+                "plural": "Activities", 
+                "singular": "Activity"
+            }, 
+            "presentation": {
+                "all": "{item, property, id} ({item, property, issuedAt})", 
+                "isolated": "{item, property, id} ({item, property, issuedAt})", 
+                "own": "{item, property, id} ({item, property, issuedAt})"
+            }, 
+            "properties": {
+                "changedData": "changed data", 
+                "id": "identifier", 
+                "issuedAt": "time", 
+                "originalData": "original data", 
+                "tableName": "table", 
+                "transaction": {
+                    "clientAddress": "IP address", 
+                    "description": "description", 
+                    "plugin": "plugin", 
+                    "source": "source", 
+                    "user": "user"
+                }, 
+                "verb": "table action type"
+            }
+        }
+    }, 
+    "settings": {
+        "activity": {
+            "pagetitle": "Activities"
+        }
+    }
+}

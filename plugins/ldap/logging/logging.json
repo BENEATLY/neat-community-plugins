@@ -1,0 +1,30 @@
+{
+    "loggers": {
+        "plugin": {
+            "plugins": {
+                "5": {
+                    "api": {
+                        "file": "api.log", 
+                        "level": "DEBUG", 
+                        "subPath": null
+                    }, 
+                    "auth": {
+                        "file": "auth.log", 
+                        "level": "DEBUG", 
+                        "subPath": null
+                    }, 
+                    "ldap-sync": {
+                        "file": "ldap-sync.log", 
+                        "level": "DEBUG", 
+                        "subPath": null
+                    }, 
+                    "resources": {
+                        "file": "resources.log", 
+                        "level": "DEBUG", 
+                        "subPath": null
+                    }
+                }
+            }
+        }
+    }
+}

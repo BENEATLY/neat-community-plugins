@@ -1,0 +1,550 @@
+{
+    "definitions": {
+        "Object": {
+            "LDAPGroup": {
+                "properties": {
+                    "all": [
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}team/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "linked": true, 
+                            "property": "team", 
+                            "reference": "Team", 
+                            "sort": {
+                                "order": true, 
+                                "priority": 1
+                            }, 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}function/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "linked": true, 
+                            "property": "function", 
+                            "reference": "Function", 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "max": 99, 
+                                "min": 3, 
+                                "nullable": false, 
+                                "restriction": [
+                                    "unique"
+                                ], 
+                                "type": "String"
+                            }, 
+                            "property": "path", 
+                            "value": ""
+                        }, 
+                        {
+                            "accepted": {
+                                "na": true, 
+                                "nullable": true, 
+                                "type": "Boolean"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "syncStatus", 
+                            "value": false, 
+                            "visualisation": [
+                                {
+                                    "type": "icon", 
+                                    "value": [
+                                        {
+                                            "class": "table-icon full-colored defaultcursor", 
+                                            "link": "/assets/svgs/check-green.svg", 
+                                            "value": true
+                                        }, 
+                                        {
+                                            "class": "table-icon full-colored defaultcursor", 
+                                            "link": "/assets/svgs/cross-red.svg", 
+                                            "value": false
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ], 
+                    "isolated": [
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}team/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "linked": true, 
+                            "property": "team", 
+                            "reference": "Team", 
+                            "sort": {
+                                "order": true, 
+                                "priority": 1
+                            }, 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}function/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "linked": true, 
+                            "property": "function", 
+                            "reference": "Function", 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "max": 99, 
+                                "min": 3, 
+                                "nullable": false, 
+                                "restriction": [
+                                    "unique"
+                                ], 
+                                "type": "String"
+                            }, 
+                            "property": "path", 
+                            "value": ""
+                        }, 
+                        {
+                            "accepted": {
+                                "na": true, 
+                                "nullable": true, 
+                                "type": "Boolean"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "syncStatus", 
+                            "value": false, 
+                            "visualisation": [
+                                {
+                                    "type": "icon", 
+                                    "value": [
+                                        {
+                                            "class": "table-icon full-colored defaultcursor", 
+                                            "link": "/assets/svgs/check-green.svg", 
+                                            "value": true
+                                        }, 
+                                        {
+                                            "class": "table-icon full-colored defaultcursor", 
+                                            "link": "/assets/svgs/cross-red.svg", 
+                                            "value": false
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ], 
+                    "own": [
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}team/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "linked": true, 
+                            "property": "team", 
+                            "reference": "Team", 
+                            "sort": {
+                                "order": true, 
+                                "priority": 1
+                            }, 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}function/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "linked": true, 
+                            "property": "function", 
+                            "reference": "Function", 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "max": 99, 
+                                "min": 3, 
+                                "nullable": false, 
+                                "restriction": [
+                                    "unique"
+                                ], 
+                                "type": "String"
+                            }, 
+                            "property": "path", 
+                            "value": ""
+                        }, 
+                        {
+                            "accepted": {
+                                "na": true, 
+                                "nullable": true, 
+                                "type": "Boolean"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "syncStatus", 
+                            "value": false, 
+                            "visualisation": [
+                                {
+                                    "type": "icon", 
+                                    "value": [
+                                        {
+                                            "class": "table-icon full-colored defaultcursor", 
+                                            "link": "/assets/svgs/check-green.svg", 
+                                            "value": true
+                                        }, 
+                                        {
+                                            "class": "table-icon full-colored defaultcursor", 
+                                            "link": "/assets/svgs/cross-red.svg", 
+                                            "value": false
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }, 
+            "LDAPUserChange": {
+                "properties": {
+                    "all": [
+                        {
+                            "accepted": {
+                                "type": "DateTime"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "timestamp", 
+                            "sort": {
+                                "order": false, 
+                                "priority": 1
+                            }, 
+                            "value": null
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}user/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "linked": true, 
+                            "property": "user", 
+                            "reference": "User", 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}apiaction/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "action", 
+                            "reference": "ApiAction", 
+                            "value": {
+                                "id": null
+                            }
+                        }
+                    ], 
+                    "isolated": [
+                        {
+                            "accepted": {
+                                "type": "DateTime"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "timestamp", 
+                            "sort": {
+                                "order": false, 
+                                "priority": 1
+                            }, 
+                            "value": null
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}user/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "linked": true, 
+                            "property": "user", 
+                            "reference": "User", 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}apiaction/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "action", 
+                            "reference": "ApiAction", 
+                            "value": {
+                                "id": null
+                            }
+                        }
+                    ], 
+                    "own": [
+                        {
+                            "accepted": {
+                                "type": "DateTime"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "timestamp", 
+                            "sort": {
+                                "order": false, 
+                                "priority": 1
+                            }, 
+                            "value": null
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}user/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "linked": true, 
+                            "property": "user", 
+                            "reference": "User", 
+                            "value": {
+                                "id": null
+                            }
+                        }, 
+                        {
+                            "accepted": {
+                                "list": "{{apiRootUrl}}apiaction/list", 
+                                "nullable": false, 
+                                "type": "Id"
+                            }, 
+                            "editable": false, 
+                            "initialisable": false, 
+                            "property": "action", 
+                            "reference": "ApiAction", 
+                            "value": {
+                                "id": null
+                            }
+                        }
+                    ]
+                }
+            }
+        }, 
+        "Plugin": {
+            "5": {
+                "Connection": [
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 5, 
+                            "nullable": false, 
+                            "type": "String"
+                        }, 
+                        "property": "url"
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 3, 
+                            "min": 2, 
+                            "nullable": false, 
+                            "step": 1, 
+                            "type": "Number"
+                        }, 
+                        "property": "protocol"
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": false, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "userName", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": false, 
+                            "type": "String"
+                        }, 
+                        "censored": true, 
+                        "property": "password", 
+                        "value": "", 
+                        "visible": false
+                    }
+                ], 
+                "Linked": [
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": false, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "userName", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": false, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "firstName", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": false, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "lastName", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": false, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "mail", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": true, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "phone", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": true, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "image", 
+                        "value": ""
+                    }
+                ], 
+                "Synchronisation": [
+                    {
+                        "accepted": {
+                            "max": 8640, 
+                            "min": 60, 
+                            "nullable": false, 
+                            "step": 1, 
+                            "type": "Number", 
+                            "unit": "seconds"
+                        }, 
+                        "property": "interval"
+                    }, 
+                    {
+                        "accepted": {
+                            "nullable": false, 
+                            "type": "Boolean"
+                        }, 
+                        "property": "fullSync"
+                    }, 
+                    {
+                        "accepted": {
+                            "nullable": true, 
+                            "type": "DateTime"
+                        }, 
+                        "editable": false, 
+                        "initialisable": false, 
+                        "property": "lastSync", 
+                        "value": null
+                    }
+                ]
+            }
+        }
+    }, 
+    "navigation": {
+        "leftbar": {
+            "settings": {
+                "plugins": {
+                    "subItems": {
+                        "configure": {
+                            "subItems": {
+                                "ldap": {
+                                    "name": "leftbar.settings.plugin.configure.ldap", 
+                                    "pluginActionRights": [
+                                        {
+                                            "action": "use", 
+                                            "level": "all", 
+                                            "plugin": 5
+                                        }
+                                    ], 
+                                    "routerLink": "settings/plugin/configure/ldap"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

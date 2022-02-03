@@ -1,0 +1,173 @@
+{
+    "leftbar": {
+        "settings": {
+            "plugin": {
+                "configure": {
+                    "ldap": "LDAP"
+                }
+            }
+        }
+    }, 
+    "object": {
+        "LDAPGroup": {
+            "help": {
+                "intro": "{right, select, own{Jouw} isolated{Je groep's} other{Alle}} LDAP groepen worden hier weergegeven. Een LDAP groep wordt gebruikt in combinatie met de LDAP extensie om te configureren welke LDAP paden (die gebruikersinformatie bevatten) gelinkt zijn met een bepaald team en functie in de applicatie.", 
+                "properties": {
+                    "function": "De functie die gelinkt is aan de gebruikers op het gedefineerde LDAP pad", 
+                    "path": "Het LDAP pad (v.b. cn=group,ou=people,dc=neatly,dc=be)", 
+                    "syncStatus": "De laatste synchronisatiestatus van het gedefineerde LDAP pad", 
+                    "team": "De groep die gelinkt is aan de gebruikers op het gedefineerde LDAP pad"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "cre\u00eber LDAP groep"
+                }, 
+                "delete": {
+                    "title": "ben je zeker dat je deze LDAP groep wil verwijderen?"
+                }, 
+                "edit": {
+                    "title": "wijzig LDAP groep: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                }, 
+                "info": {
+                    "title": "LDAP groep: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                }
+            }, 
+            "naming": {
+                "plural": "LDAP Groepen", 
+                "singular": "LDAP Groep"
+            }, 
+            "presentation": {
+                "all": "{item, property, path} ({item, property, team.name}, {item, property, function.name})", 
+                "isolated": "{item, property, path} ({item, property, team.name}, {item, property, function.name})", 
+                "own": "{item, property, path} ({item, property, team.name}, {item, property, function.name})"
+            }, 
+            "properties": {
+                "function": "functie", 
+                "id": "identificatie", 
+                "path": "LDAP pad", 
+                "syncStatus": "Sync status", 
+                "team": "groep"
+            }
+        }, 
+        "LDAPUserChange": {
+            "help": {
+                "intro": "{right, select, own{Jouw} isolated{Je groep's} other{Alle}} LDAP gebruiker wijzigingen worden hier weergegeven. De oorsprong van de wijziging is een modificatie op de externe LDAP server. De toegevoegde of gewijzigde gebruiker is het resultaat van het synchronisatieproces met die LDAP server.", 
+                "properties": {
+                    "action": "De actie die uitgevoerd werd op de LDAP gebruiker", 
+                    "timestamp": "Het tijdstip waarop de LDAP gebruiker werd toegevoegd of gewijzigd", 
+                    "user": "De toegevoegde of gewijzigde LDAP gebruiker"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "cre\u00eber LDAP gebruikerswijziging"
+                }, 
+                "delete": {
+                    "title": "ben je zeker dat je deze LDAP gebruikerswijziging wil verwijderen?"
+                }, 
+                "edit": {
+                    "title": "wijzig LDAP gebruikerswijziging: {item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}"
+                }, 
+                "info": {
+                    "title": "LDAP gebruikerswijziging: {item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}"
+                }
+            }, 
+            "naming": {
+                "plural": "LDAP Gebruikerswijzigingen", 
+                "singular": "LDAP Gebruikerswijziging"
+            }, 
+            "presentation": {
+                "all": "{item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}", 
+                "isolated": "{item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}", 
+                "own": "{item, property, user.firstName} {item, property, user.lastName} - {item, property, action.name}"
+            }, 
+            "properties": {
+                "action": "actie", 
+                "id": "identificatie", 
+                "timestamp": "tijdstip", 
+                "user": "gebruiker"
+            }
+        }
+    }, 
+    "plugins": {
+        "5": {
+            "Connection": {
+                "password": "Wachtwoord", 
+                "protocol": "Protocol", 
+                "url": "LDAP URL", 
+                "userName": "Gebruikersnaam"
+            }, 
+            "Linked": {
+                "firstName": "Voornaam", 
+                "image": "Profielfoto", 
+                "lastName": "Achternaam", 
+                "mail": "E-mail", 
+                "phone": "Telefoon", 
+                "userName": "Gebruikersnaam"
+            }, 
+            "Synchronisation": {
+                "fullSync": "Volledige Sync.", 
+                "interval": "Interval", 
+                "lastSync": "Laatste Sync."
+            }, 
+            "groups": {
+                "Connection": "LDAP Connectie", 
+                "Linked": "Gelinkte Eigenschappen", 
+                "Synchronisation": "Synchronisatie"
+            }, 
+            "help": {
+                "intro": {
+                    "Connection": "Dit kader bevat alle input die nodig is om een connectie te kunnen aanmaken met een externe LDAP server.", 
+                    "Linked": "Het doel van dit kader is om gebruiker input te linken aan attributen van LDAP objecten. Voeg de naam van het LDAP object attribuut toe naast de bijbehorende gebruikerseigenschap. Hierdoor kan gebruikersinformatie automatisch gesynchroniseert worden tussen de LDAP server en de applicatie. Dit resulteert in het automatisch toevoegen van gebruikers in de applicatie.", 
+                    "Synchronisation": "Dit kader bevat generieke parameters die gebruikt worden bij het synchroniseren tussen de LDAP server en de applicatie."
+                }, 
+                "properties": {
+                    "Connection": {
+                        "password": "Het wachtwoord van de gebruiker die de authenticatie met de LDAP server uitvoert.", 
+                        "protocol": "Het protocol dat gebruikt wordt door de LDAP server. De mogelijkheden zijn: versie 2 of versie 3.", 
+                        "url": "De URL van de LDAP server. Deze URL begint met \"ldap://\" of \"ldaps://\" (voor beveiligde connecties).", 
+                        "userName": "De naam van de gebruiker die de authenticatie met de LDAP server uitvoert."
+                    }, 
+                    "Linked": {
+                        "firstName": "Het gelinke LDAP object attribuut voor de voornaam van de gebruiker", 
+                        "image": "Het gelinke LDAP object attribuut voor de profielfoto van de gebruiker", 
+                        "lastName": "Het gelinke LDAP object attribuut voor de achternaam van de gebruiker", 
+                        "mail": "Het gelinke LDAP object attribuut voor het e-mailadres van de gebruiker", 
+                        "phone": "Het gelinke LDAP object attribuut voor het telefoonnummer van de gebruiker", 
+                        "userName": "Het gelinke LDAP object attribuut voor de gebruikersnaam"
+                    }, 
+                    "Synchronisation": {
+                        "fullSync": "<li>Bij een <b>ingeschakelde</b> toestand zal de gebruikersgegevens volledig gesynchroniseert worden met de externe LDAP server. Verschillen tussen de huidige gebruikersgegevens (in de applicatie) en gebruikersgegevens op de LDAP server worden rechtgezet.</li><li>Bij een <b>uitgeschakelde</b> toestand worden enkel nieuwe gebruikers toegevoegd. Bestaande gebruikersgegevens (in de applicatie) worden niet gewijzigd tijdens een synchronisatie.</li>", 
+                        "interval": "Het tijdsinterval tussen twee opeenvolgende synchronisaties (in seconden)", 
+                        "lastSync": "Het laatste tijdstip waarbij er een succesvolle synchronisatie met de externe LDAP server werd uitgevoerd"
+                    }
+                }
+            }
+        }
+    }, 
+    "service": {
+        "plugin": {
+            "ldap": {
+                "ldap-sync": {
+                    "description": "LDAP synchronisatie service"
+                }
+            }
+        }
+    }, 
+    "settings": {
+        "plugin": {
+            "configure": {
+                "ldap": {
+                    "groups": "LDAP Groepen", 
+                    "info": {
+                        "groups": "Dit kader geeft alle LDAP groepen weer die gelinkt zijn aan een bepaalde groep/functie combinatie. Deze LDAP groepen worden gesynchroniseert tussen de externe LDAP server en de applicatie. Gebruikersobjecten in de LDAP groep worden automatisch geimporteerd in de applicatie als gebruikers met de gespecifieerde groep en functie.", 
+                        "recent-changes": "Dit kader geeft alle LDAP gebruikers weer die recent toegevoegd of gewijzigd zijn. De oorsprong van de wijziging is een modificatie op de externe LDAP server. De toegevoegde of gewijzigde gebruiker is het resultaat van het synchronisatieproces met die LDAP server."
+                    }, 
+                    "pagetitle": "LDAP", 
+                    "recent-changes": "Recente LDAP Gebruikerwijzigingen"
+                }
+            }
+        }
+    }
+}

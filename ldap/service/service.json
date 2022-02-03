@@ -1,8 +1,0 @@
-[
-    {
-        "description": "service.plugin.ldap.ldap-sync.description",
-        "name": "ldap-sync",
-        "plugin": 5,
-        "service": "neatly-base.plugin-5"
-    }
-]

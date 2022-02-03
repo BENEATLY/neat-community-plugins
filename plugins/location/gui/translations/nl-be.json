@@ -1,0 +1,125 @@
+{
+    "object": {
+        "Address": {
+            "help": {
+                "intro": "{right, select, own{Je eigen} isolated{Je groep's} other{Alle}} adressen worden hier weergegeven.", 
+                "properties": {
+                    "city": "De naam van de stad waarbinnen het adres gelegen is", 
+                    "coordinate": "De co\u00f6rdinaten waarop het adres gelegen is", 
+                    "country": "Het land waarbinnen het adres gelegen is", 
+                    "nr": "Het huisnummer van het adres", 
+                    "postalCode": "De ZIP/postcode van de stad", 
+                    "street": "De straat van het adres"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "cre\u00eber adres"
+                }, 
+                "delete": {
+                    "title": "ben je zeker dat je dit adres wil verwijderen?"
+                }, 
+                "edit": {
+                    "title": "wijzig adres: [{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]"
+                }, 
+                "info": {
+                    "title": "adres: [{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]"
+                }
+            }, 
+            "naming": {
+                "plural": "Adressen", 
+                "singular": "Adres"
+            }, 
+            "presentation": {
+                "all": "[{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]", 
+                "isolated": "[{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]", 
+                "own": "[{item, property, street} {item, property, nr}, {item, property, city}, {item, property, country.name}]"
+            }, 
+            "properties": {
+                "city": "stad", 
+                "coordinate": "co\u00f6rdinaat", 
+                "country": "land", 
+                "id": "identificatie", 
+                "nr": "nummer", 
+                "postalCode": "ZIP/postcode", 
+                "street": "straat"
+            }
+        }, 
+        "Coordinate": {
+            "help": {
+                "intro": "{right, select, own{Je eigen} isolated{Je groep's} other{Alle}} co\u00f6rdinaten worden hier opgelijst.", 
+                "properties": {
+                    "elevation": "De hoogte van het co\u00f6rdinaat", 
+                    "latitude": "De breedtegraad van het co\u00f6rdinaat", 
+                    "longitude": "De lengtegraad van het co\u00f6rdinaat"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "cre\u00eber co\u00f6rdinaat"
+                }, 
+                "delete": {
+                    "title": "ben je zeker dat je deze co\u00f6rdinaat wil verwijderen?"
+                }, 
+                "edit": {
+                    "title": "wijzig co\u00f6rdinaat: ({item, property, latitude}, {item, property, longitude}, {item, property, elevation})"
+                }, 
+                "info": {
+                    "title": "co\u00f6rdinaat: ({item, property, latitude}, {item, property, longitude}, {item, property, elevation})"
+                }
+            }, 
+            "naming": {
+                "plural": "Co\u00f6rdinaten", 
+                "singular": "Co\u00f6rdinaat"
+            }, 
+            "presentation": {
+                "all": "({item, property, latitude}, {item, property, longitude}, {item, property, elevation})", 
+                "isolated": "({item, property, latitude}, {item, property, longitude}, {item, property, elevation})", 
+                "own": "({item, property, latitude}, {item, property, longitude}, {item, property, elevation})"
+            }, 
+            "properties": {
+                "elevation": "hoogte", 
+                "id": "identificatie", 
+                "latitude": "breedtegraad", 
+                "longitude": "lengtegraad"
+            }
+        }, 
+        "Country": {
+            "help": {
+                "intro": "{right, select, own{Je eigen} isolated{Je groep's} other{Alle}} landen worden hier weergegeven.", 
+                "properties": {
+                    "countryCode": "De code van het land", 
+                    "name": "De naam van het land"
+                }
+            }, 
+            "modal": {
+                "create": {
+                    "title": "cre\u00eber land"
+                }, 
+                "delete": {
+                    "title": "ben je zeker dat je dit land wil verwijderen?"
+                }, 
+                "edit": {
+                    "title": "wijzig land: {item, property, name}"
+                }, 
+                "info": {
+                    "title": "land: {item, property, name}"
+                }
+            }, 
+            "naming": {
+                "plural": "Landen", 
+                "singular": "Land"
+            }, 
+            "presentation": {
+                "all": "{item, property, name}", 
+                "isolated": "{item, property, name}", 
+                "own": "{item, property, name}"
+            }, 
+            "properties": {
+                "countryCode": "landcode", 
+                "id": "identificatie", 
+                "name": "naam"
+            }
+        }
+    }
+}
