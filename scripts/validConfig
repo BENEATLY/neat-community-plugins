@@ -1,0 +1,67 @@
+#!/usr/local/bin/python
+
+################################################################################
+# Author:     Thomas D'haenens
+# License:    GPL-3.0
+# Link:       https://github.com/BENEATLY/neat-community/
+# Contact:    https://neatly.be/
+################################################################################
+
+
+# IMPORT: Standard Modules
+import sys                                                                                      # System Lib
+import json                                                                                     # JSON Lib
+import os                                                                                       # OS Lib
+
+
+# DEFINITIONS
+checks = {'valid': [], 'invalid': []}
+
+
+# FUNCTION: Read JSON File
+def readJSONFile(file):
+    with open(file) as content:
+        return json.load(content)
+
+# FUNCTION: Is Valid
+def isValid(file):
+    try:
+
+        # Read File
+        readJSONFile(file)
+
+        # Valid
+        checks['valid'].append(file)
+
+    except:
+
+        # Invalid
+        checks['invalid'].append(file)
+
+
+# DETERMINE: Source Folder
+scriptFolder = os.path.dirname(os.path.abspath(__file__))
+sourceFolder = os.path.abspath(os.path.join(scriptFolder, '../plugins')) + '/'
+
+
+# ITERATE: Source Files
+for root, dirs, files in os.walk(sourceFolder):
+
+    # Iterate over Files
+    for file in files:
+
+        # Is JSON File
+        if (file.endswith('.json')):
+
+            # Check if Valid Config File
+            isValid(os.path.join(root, file))
+
+
+# End Message
+print('-> Verified ' + str(len(checks['valid']) + len(checks['invalid'])) + ' config files')
+print('-> ' + str(len(checks['valid'])) + ' valid config files')
+print('-> ' + str(len(checks['invalid'])) + ' invalid config files')
+
+# Display Invalid Config Files
+for file in checks['invalid']:
+    print('-> Invalid config file: ' + str(file))
