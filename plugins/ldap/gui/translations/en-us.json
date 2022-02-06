@@ -13,10 +13,13 @@
             "help": {
                 "intro": "{right, select, own{Your} isolated{Your team's} other{All}} LDAP groups are visualised here. An LDAP group is used in combination with the LDAP plugin to configure which LDAP paths (containing user information) are linked to which teams and functions in the application.", 
                 "properties": {
-                    "function": "The function linked to users of the specified LDAP path", 
+                    "force": "When enabled, the person entries found in the specified LDAP path will be assigned to the function and team defined in this LDAP group (not the team/function defined in the \"linked properties\" section)", 
+                    "function": "The function linked to person entries found in the specified LDAP path. If \"force\" is enabled, this function will be assigned to the user. If \"force\" is disabled, this function will be used as a fallback option in case the \"linked property\" for function cannot be found for the person entry.", 
+                    "oneLevel": "When enabled, the plugin will only look for person entries with the exact specified path (no sub paths)", 
                     "path": "The LDAP path (e.g. cn=group,ou=people,dc=neatly,dc=be)", 
+                    "priority": "This value determines the order of LDAP group handling. The LDAP group containing the highest rights need to be configured with the highest priority. LDAP groups containing lower rights get a lower priority.", 
                     "syncStatus": "The latest synchronisation status of the specified LDAP path", 
-                    "team": "The team linked to users of the specified LDAP path"
+                    "team": "The team linked to person entries found in the specified LDAP path. If \"force\" is enabled, this team will be assigned to the user. If \"force\" is disabled, this team will be used as a fallback option in case the \"linked property\" for team cannot be found for the person entry."
                 }
             }, 
             "modal": {
@@ -27,10 +30,10 @@
                     "title": "are you sure you want to delete this LDAP group?"
                 }, 
                 "edit": {
-                    "title": "edit LDAP group: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                    "title": "edit LDAP group: {item, property, path}"
                 }, 
                 "info": {
-                    "title": "LDAP group: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                    "title": "LDAP group: {item, property, path}"
                 }
             }, 
             "naming": {
@@ -38,15 +41,18 @@
                 "singular": "LDAP Group"
             }, 
             "presentation": {
-                "all": "{item, property, path} ({item, property, team.name}, {item, property, function.name})", 
-                "isolated": "{item, property, path} ({item, property, team.name}, {item, property, function.name})", 
-                "own": "{item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                "all": "{item, property, path}", 
+                "isolated": "{item, property, path}", 
+                "own": "{item, property, path}"
             }, 
             "properties": {
+                "force": "force", 
                 "function": "function", 
                 "id": "identifier", 
+                "oneLevel": "exact path", 
                 "path": "LDAP path", 
-                "syncStatus": "Sync status", 
+                "priority": "priority", 
+                "syncStatus": "sync status", 
                 "team": "team"
             }
         }, 
@@ -100,10 +106,12 @@
             }, 
             "Linked": {
                 "firstName": "First Name", 
+                "function": "Function", 
                 "image": "Image", 
                 "lastName": "Last Name", 
                 "mail": "Mail", 
                 "phone": "Phone", 
+                "team": "Team", 
                 "userName": "Username"
             }, 
             "Synchronisation": {
@@ -131,10 +139,12 @@
                     }, 
                     "Linked": {
                         "firstName": "The linked LDAP object attribute for the first name of the user", 
+                        "function": "The linked LDAP object attribute for the function of the user (upon synchronisation, missing function entries will be created)", 
                         "image": "The linked LDAP object attribute for the image of the user", 
                         "lastName": "The linked LDAP object attribute for the last name of the user", 
                         "mail": "The linked LDAP object attribute for the mail address of the user", 
                         "phone": "The linked LDAP object attribute for the phone number of the user", 
+                        "team": "The linked LDAP object attribute for the team of the user (upon synchronisation, missing team entries will be created)", 
                         "userName": "The linked LDAP object attribute for the username"
                     }, 
                     "Synchronisation": {

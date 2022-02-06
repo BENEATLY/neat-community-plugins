@@ -13,10 +13,13 @@
             "help": {
                 "intro": "{right, select, own{Jouw} isolated{Je groep's} other{Alle}} LDAP groepen worden hier weergegeven. Een LDAP groep wordt gebruikt in combinatie met de LDAP extensie om te configureren welke LDAP paden (die gebruikersinformatie bevatten) gelinkt zijn met een bepaald team en functie in de applicatie.", 
                 "properties": {
-                    "function": "De functie die gelinkt is aan de gebruikers op het gedefineerde LDAP pad", 
+                    "force": "Wanneer dit ingeschakeld is zullen gebruikergegevens op het gedefinieerde LDAP path geassigneerd worden aan de functie en de groep die in deze LDAP groep is gedefinieerd (en dus niet de groep/functie die gedefinieerd is in de \"gelinkte eigenschappen\" sectie)", 
+                    "function": "De functie gelinkt aan de gebruikergegevens op het gedefineerde LDAP pad. Als \"forceer\" ingeschakeld zal de gespecifieerde functie van deze LDAP groep gelinkt worden aan de gebruiker. Als \"forceer\" uitgeschakeld is zal de gespecifieerde functie van deze LDAP groep gebruikt worden als terugvaloptie indien de \"gelinkte eigenschap\" voor de functie niet gevonden kan worden in de gebruikergegevens.", 
+                    "oneLevel": "Wanneer dit ingeschakeld is zal de extensie enkel op zoek gaan naar persoonsvermeldingen op het exacte gespecifieerde pad (geen sub-paden)", 
                     "path": "Het LDAP pad (v.b. cn=group,ou=people,dc=neatly,dc=be)", 
+                    "priority": "Deze waarde bepaalt de volgorde waarin LDAP groepen worden afgehandeld. LDAP groepen met de hoogste rechten moeten geconfigureerd worden met de hoogste prioriteit. LDAP groepen met lagere rechten moeten geconfigureerd worden met een lagere prioriteit.", 
                     "syncStatus": "De laatste synchronisatiestatus van het gedefineerde LDAP pad", 
-                    "team": "De groep die gelinkt is aan de gebruikers op het gedefineerde LDAP pad"
+                    "team": "De groep gelinkt aan de gebruikergegevens op het gedefineerde LDAP pad. Als \"forceer\" ingeschakeld zal de gespecifieerde groep van deze LDAP groep gelinkt worden aan de gebruiker. Als \"forceer\" uitgeschakeld is zal de gespecifieerde groep van deze LDAP groep gebruikt worden als terugvaloptie indien de \"gelinkte eigenschap\" voor de groep niet gevonden kan worden in de gebruikergegevens."
                 }
             }, 
             "modal": {
@@ -27,10 +30,10 @@
                     "title": "ben je zeker dat je deze LDAP groep wil verwijderen?"
                 }, 
                 "edit": {
-                    "title": "wijzig LDAP groep: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                    "title": "wijzig LDAP groep: {item, property, path}"
                 }, 
                 "info": {
-                    "title": "LDAP groep: {item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                    "title": "LDAP groep: {item, property, path}"
                 }
             }, 
             "naming": {
@@ -38,15 +41,18 @@
                 "singular": "LDAP Groep"
             }, 
             "presentation": {
-                "all": "{item, property, path} ({item, property, team.name}, {item, property, function.name})", 
-                "isolated": "{item, property, path} ({item, property, team.name}, {item, property, function.name})", 
-                "own": "{item, property, path} ({item, property, team.name}, {item, property, function.name})"
+                "all": "{item, property, path}", 
+                "isolated": "{item, property, path}", 
+                "own": "{item, property, path}"
             }, 
             "properties": {
+                "force": "forceer", 
                 "function": "functie", 
                 "id": "identificatie", 
+                "oneLevel": "zelfde pad", 
                 "path": "LDAP pad", 
-                "syncStatus": "Sync status", 
+                "priority": "prioriteit", 
+                "syncStatus": "sync status", 
                 "team": "groep"
             }
         }, 
@@ -100,10 +106,12 @@
             }, 
             "Linked": {
                 "firstName": "Voornaam", 
+                "function": "Functie", 
                 "image": "Profielfoto", 
                 "lastName": "Achternaam", 
                 "mail": "E-mail", 
                 "phone": "Telefoon", 
+                "team": "Groep", 
                 "userName": "Gebruikersnaam"
             }, 
             "Synchronisation": {
@@ -131,10 +139,12 @@
                     }, 
                     "Linked": {
                         "firstName": "Het gelinke LDAP object attribuut voor de voornaam van de gebruiker", 
+                        "function": "Het gelinke LDAP object attribuut voor de functie van de gebruiker (tijdens het synchoniseren zullen onbestaande functies van gebruikers aangemaakt worden)", 
                         "image": "Het gelinke LDAP object attribuut voor de profielfoto van de gebruiker", 
                         "lastName": "Het gelinke LDAP object attribuut voor de achternaam van de gebruiker", 
                         "mail": "Het gelinke LDAP object attribuut voor het e-mailadres van de gebruiker", 
                         "phone": "Het gelinke LDAP object attribuut voor het telefoonnummer van de gebruiker", 
+                        "team": "Het gelinke LDAP object attribuut voor de groep van de gebruiker (tijdens het synchoniseren zullen onbestaande teams van gebruikers aangemaakt worden)", 
                         "userName": "Het gelinke LDAP object attribuut voor de gebruikersnaam"
                     }, 
                     "Synchronisation": {

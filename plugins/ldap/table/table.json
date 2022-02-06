@@ -59,6 +59,9 @@
                         "all": [], 
                         "common": [
                             "id", 
+                            "oneLevel", 
+                            "priority", 
+                            "force", 
                             "team", 
                             "function", 
                             "path", 
@@ -225,6 +228,9 @@
                     "all": [], 
                     "common": [
                         "id", 
+                        "oneLevel", 
+                        "priority", 
+                        "force", 
                         "team", 
                         "function", 
                         "path", 
@@ -242,6 +248,9 @@
                         "all": [], 
                         "common": [
                             "id", 
+                            "oneLevel", 
+                            "priority", 
+                            "force", 
                             "team", 
                             "function", 
                             "path", 
@@ -258,16 +267,31 @@
             }, 
             "table": {
                 "direct": {
+                    "force": {
+                        "doc": "Force Function/Team", 
+                        "nullable": false, 
+                        "type": "Boolean"
+                    }, 
                     "id": {
                         "doc": "UID", 
                         "primary_key": true, 
                         "type": "Integer"
+                    }, 
+                    "oneLevel": {
+                        "doc": "Same Level Only", 
+                        "nullable": false, 
+                        "type": "Boolean"
                     }, 
                     "path": {
                         "doc": "LDAP Path", 
                         "nullable": false, 
                         "type": "String", 
                         "unique": true
+                    }, 
+                    "priority": {
+                        "doc": "Priority", 
+                        "nullable": false, 
+                        "type": "Integer"
                     }, 
                     "syncStatus": {
                         "doc": "Synchronisation Status", 

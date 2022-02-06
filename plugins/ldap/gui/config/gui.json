@@ -49,12 +49,37 @@
                         }, 
                         {
                             "accepted": {
+                                "min": 1, 
+                                "nullable": false, 
+                                "step": 1, 
+                                "type": "Number"
+                            }, 
+                            "property": "priority", 
+                            "value": 0
+                        }, 
+                        {
+                            "accepted": {
+                                "nullable": false, 
+                                "type": "Boolean"
+                            }, 
+                            "property": "oneLevel", 
+                            "value": false
+                        }, 
+                        {
+                            "accepted": {
+                                "nullable": false, 
+                                "type": "Boolean"
+                            }, 
+                            "property": "force", 
+                            "value": false
+                        }, 
+                        {
+                            "accepted": {
                                 "na": true, 
                                 "nullable": true, 
                                 "type": "Boolean"
                             }, 
-                            "editable": false, 
-                            "initialisable": false, 
+                            "external": true, 
                             "property": "syncStatus", 
                             "value": false, 
                             "visualisation": [
@@ -122,12 +147,37 @@
                         }, 
                         {
                             "accepted": {
+                                "min": 1, 
+                                "nullable": false, 
+                                "step": 1, 
+                                "type": "Number"
+                            }, 
+                            "property": "priority", 
+                            "value": 0
+                        }, 
+                        {
+                            "accepted": {
+                                "nullable": false, 
+                                "type": "Boolean"
+                            }, 
+                            "property": "oneLevel", 
+                            "value": false
+                        }, 
+                        {
+                            "accepted": {
+                                "nullable": false, 
+                                "type": "Boolean"
+                            }, 
+                            "property": "force", 
+                            "value": false
+                        }, 
+                        {
+                            "accepted": {
                                 "na": true, 
                                 "nullable": true, 
                                 "type": "Boolean"
                             }, 
-                            "editable": false, 
-                            "initialisable": false, 
+                            "external": true, 
                             "property": "syncStatus", 
                             "value": false, 
                             "visualisation": [
@@ -195,12 +245,37 @@
                         }, 
                         {
                             "accepted": {
+                                "min": 1, 
+                                "nullable": false, 
+                                "step": 1, 
+                                "type": "Number"
+                            }, 
+                            "property": "priority", 
+                            "value": 0
+                        }, 
+                        {
+                            "accepted": {
+                                "nullable": false, 
+                                "type": "Boolean"
+                            }, 
+                            "property": "oneLevel", 
+                            "value": false
+                        }, 
+                        {
+                            "accepted": {
+                                "nullable": false, 
+                                "type": "Boolean"
+                            }, 
+                            "property": "force", 
+                            "value": false
+                        }, 
+                        {
+                            "accepted": {
                                 "na": true, 
                                 "nullable": true, 
                                 "type": "Boolean"
                             }, 
-                            "editable": false, 
-                            "initialisable": false, 
+                            "external": true, 
                             "property": "syncStatus", 
                             "value": false, 
                             "visualisation": [
@@ -473,6 +548,32 @@
                             "type": "String"
                         }, 
                         "property": "phone", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": true, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "team", 
+                        "value": ""
+                    }, 
+                    {
+                        "accepted": {
+                            "max": 99, 
+                            "min": 2, 
+                            "nullable": true, 
+                            "restriction": [
+                                "no-whitespace"
+                            ], 
+                            "type": "String"
+                        }, 
+                        "property": "function", 
                         "value": ""
                     }, 
                     {
